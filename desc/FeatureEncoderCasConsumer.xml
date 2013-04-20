@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?><casConsumerDescription xmlns="http://uima.apache.org/resourceSpecifier">
+  <frameworkImplementation>org.apache.uima.java</frameworkImplementation>
+  <implementationName>org.dbmi.uima.tools.components.idash.Encoder</implementationName>
+  <processingResourceMetaData>
+    <name>Feature Encoder for TxtVect</name>
+    <description>Encodes annotations in CAS to a vector form</description>
+    <version>1.0</version>
+    <vendor>UCSD</vendor>
+    <configurationParameters>
+      <configurationParameter>
+        <name>OutputDirectory</name>
+        <description>Directory where the output files will be written</description>
+        <type>String</type>
+        <multiValued>false</multiValued>
+        <mandatory>true</mandatory>
+      </configurationParameter>
+      <configurationParameter>
+        <name>EncodingMethod</name>
+        <description>Method of encoding to be used for feature representation. 
+0 = Binary
+1 = tf
+2 = tf.idf
+3 = Count
+4 = log.tf
+5 = logtf.idf
+100 = all</description>
+        <type>Integer</type>
+        <multiValued>false</multiValued>
+        <mandatory>true</mandatory>
+      </configurationParameter>
+      <configurationParameter>
+        <name>LabelsAreNominal</name>
+        <description>Are the labels nominal? (or alternatively, numeric).</description>
+        <type>Boolean</type>
+        <multiValued>false</multiValued>
+        <mandatory>true</mandatory>
+      </configurationParameter>
+      <configurationParameter>
+        <name>TermCountCutoff</name>
+        <description>Rare terms that occur less than this are removed.</description>
+        <type>Integer</type>
+        <multiValued>false</multiValued>
+        <mandatory>true</mandatory>
+      </configurationParameter>
+      <configurationParameter>
+        <name>DocumentPercentCutoff</name>
+        <description>Rare terms that occur in less than this % of documents are removed.</description>
+        <type>Integer</type>
+        <multiValued>false</multiValued>
+        <mandatory>true</mandatory>
+      </configurationParameter>
+      <configurationParameter>
+        <name>TrainingFile</name>
+        <description>Location of training file, if a test set is being encoded.</description>
+        <type>String</type>
+        <multiValued>false</multiValued>
+        <mandatory>false</mandatory>
+      </configurationParameter>
+    </configurationParameters>
+    <configurationParameterSettings>
+      <nameValuePair>
+        <name>EncodingMethod</name>
+        <value>
+          <integer>100</integer>
+        </value>
+      </nameValuePair>
+      <nameValuePair>
+        <name>LabelsAreNominal</name>
+        <value>
+          <boolean>true</boolean>
+        </value>
+      </nameValuePair>
+      <nameValuePair>
+        <name>TermCountCutoff</name>
+        <value>
+          <integer>10</integer>
+        </value>
+      </nameValuePair>
+      <nameValuePair>
+        <name>DocumentPercentCutoff</name>
+        <value>
+          <integer>1</integer>
+        </value>
+      </nameValuePair>
+      <nameValuePair>
+        <name>OutputDirectory</name>
+        <value>
+          <string>/Users/abhishek/Workspaces/DBMI/TextVect/output/i2b2Obesity</string>
+        </value>
+      </nameValuePair>
+    </configurationParameterSettings>
+    <typeSystemDescription>
+      <imports>
+        <import name="org.apache.uima.examples.SourceDocumentInformation"/>
+      </imports>
+    </typeSystemDescription>
+    <capabilities>
+      <capability>
+        <inputs>
+          <type allAnnotatorFeatures="true">org.apache.uima.examples.SourceDocumentInformation</type>
+        </inputs>
+        <outputs/>
+        <languagesSupported/>
+      </capability>
+    </capabilities>
+    <operationalProperties>
+      <modifiesCas>false</modifiesCas>
+      <multipleDeploymentAllowed>true</multipleDeploymentAllowed>
+      <outputsNewCASes>false</outputsNewCASes>
+    </operationalProperties>
+  </processingResourceMetaData>
+</casConsumerDescription>

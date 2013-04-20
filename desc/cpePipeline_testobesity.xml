@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="UTF-8"?><cpeDescription xmlns="http://uima.apache.org/resourceSpecifier">
+    <collectionReader>
+        <collectionIterator>
+            <descriptor>
+                <import location="XMLCorpusReader.xml"/>
+            </descriptor>
+            <configurationParameterSettings>
+                <nameValuePair>
+                    <name>DataFilePath</name>
+                    <value>
+                        <string>/Users/abhishek/Workspaces/DBMI/TextVect/data/i2b2ObesityChallenge2008/data/obesity_patient_records_test.xml</string>
+                    </value>
+                </nameValuePair>
+                <nameValuePair>
+                    <name>LabelFilePath</name>
+                    <value>
+                        <string>/Users/abhishek/Workspaces/DBMI/TextVect/data/i2b2ObesityChallenge2008/labels/obesity_standoff_annotations_test_textual.xml</string>
+                    </value>
+                </nameValuePair>
+            </configurationParameterSettings>
+        </collectionIterator>
+    </collectionReader>
+    <casProcessors casPoolSize="3" processingUnitThreadCount="1">
+        <casProcessor deployment="integrated" name="SimpleSegmentAnnotator">
+            <descriptor>
+                <import location="../../cTAKES/cTAKESdesc/coredesc/analysis_engine/SimpleSegmentAnnotator.xml"/>
+            </descriptor>
+            <deploymentParameters/>
+            <errorHandling>
+                <errorRateThreshold action="terminate" value="0/1000"/>
+                <maxConsecutiveRestarts action="terminate" value="30"/>
+                <timeout max="100000" default="-1"/>
+            </errorHandling>
+            <checkpoint batch="10000" time="1000ms"/>
+        </casProcessor>
+        <casProcessor deployment="integrated" name="Sentence Detector annotator">
+            <descriptor>
+                <import location="../../cTAKES/cTAKESdesc/coredesc/analysis_engine/SentenceDetectorAnnotator.xml"/>
+            </descriptor>
+            <deploymentParameters/>
+            <errorHandling>
+                <errorRateThreshold action="terminate" value="0/1000"/>
+                <maxConsecutiveRestarts action="terminate" value="30"/>
+                <timeout max="100000" default="-1"/>
+            </errorHandling>
+            <checkpoint batch="10000" time="1000ms"/>
+        </casProcessor>
+        <casProcessor deployment="integrated" name="TokenizerAnnotatorPTB">
+            <descriptor>
+                <import location="../../cTAKES/cTAKESdesc/coredesc/analysis_engine/TokenizerAnnotator.xml"/>
+            </descriptor>
+            <deploymentParameters/>
+            <errorHandling>
+                <errorRateThreshold action="terminate" value="0/1000"/>
+                <maxConsecutiveRestarts action="terminate" value="30"/>
+                <timeout max="100000" default="-1"/>
+            </errorHandling>
+            <checkpoint batch="10000" time="1000ms"/>
+        </casProcessor>
+        <casProcessor deployment="integrated" name="LVG Annotator">
+            <descriptor>
+                <import location="../../cTAKES/cTAKESdesc/lvgdesc/analysis_engine/LvgAnnotator.xml"/>
+            </descriptor>
+            <deploymentParameters/>
+            <errorHandling>
+                <errorRateThreshold action="terminate" value="0/1000"/>
+                <maxConsecutiveRestarts action="terminate" value="30"/>
+                <timeout max="100000" default="-1"/>
+            </errorHandling>
+            <checkpoint batch="10000" time="1000ms"/>
+        </casProcessor>
+        <casProcessor deployment="integrated" name="ContextDependentTokenizerAnnotator">
+            <descriptor>
+                <import location="../../cTAKES/cTAKESdesc/cdtdesc/analysis_engine/ContextDependentTokenizerAnnotator.xml"/>
+            </descriptor>
+            <deploymentParameters/>
+            <errorHandling>
+                <errorRateThreshold action="terminate" value="0/1000"/>
+                <maxConsecutiveRestarts action="terminate" value="30"/>
+                <timeout max="100000" default="-1"/>
+            </errorHandling>
+            <checkpoint batch="10000" time="1000ms"/>
+        </casProcessor>
+        <casProcessor deployment="integrated" name="POSTagger">
+            <descriptor>
+                <import location="../../cTAKES/cTAKESdesc/posdesc/analysis_engine/POSTagger.xml"/>
+            </descriptor>
+            <deploymentParameters/>
+            <errorHandling>
+                <errorRateThreshold action="terminate" value="0/1000"/>
+                <maxConsecutiveRestarts action="terminate" value="30"/>
+                <timeout max="100000" default="-1"/>
+            </errorHandling>
+            <checkpoint batch="10000" time="1000ms"/>
+        </casProcessor>
+        <casProcessor deployment="integrated" name="Chunker">
+            <descriptor>
+                <import location="../../cTAKES/cTAKESdesc/chunkerdesc/analysis_engine/ChunkerTxtVect.xml"/>
+            </descriptor>
+            <deploymentParameters/>
+            <errorHandling>
+                <errorRateThreshold action="terminate" value="0/1000"/>
+                <maxConsecutiveRestarts action="terminate" value="30"/>
+                <timeout max="100000" default="-1"/>
+            </errorHandling>
+            <checkpoint batch="10000" time="1000ms"/>
+        </casProcessor>
+        <casProcessor deployment="integrated" name="Adjust NP in NP NP to span both">
+            <descriptor>
+                <import location="../../cTAKES/cTAKESdesc/chunkerdesc/analysis_engine/AdjustNounPhraseToIncludeFollowingNP.xml"/>
+            </descriptor>
+            <deploymentParameters/>
+            <errorHandling>
+                <errorRateThreshold action="terminate" value="0/1000"/>
+                <maxConsecutiveRestarts action="terminate" value="30"/>
+                <timeout max="100000" default="-1"/>
+            </errorHandling>
+            <checkpoint batch="10000" time="1000ms"/>
+        </casProcessor>
+        <casProcessor deployment="integrated" name="Adjust NP in NP PP NP to span all three">
+            <descriptor>
+                <import location="../../cTAKES/cTAKESdesc/chunkerdesc/analysis_engine/AdjustNounPhraseToIncludeFollowingPPNP.xml"/>
+            </descriptor>
+            <deploymentParameters/>
+            <errorHandling>
+                <errorRateThreshold action="terminate" value="0/1000"/>
+                <maxConsecutiveRestarts action="terminate" value="30"/>
+                <timeout max="100000" default="-1"/>
+            </errorHandling>
+            <checkpoint batch="10000" time="1000ms"/>
+        </casProcessor>
+        <casProcessor deployment="integrated" name="LookupWindowAnnotator">
+            <descriptor>
+                <import location="../../cTAKES/cTAKESdesc/cdpdesc/analysis_engine/LookupWindowAnnotator.xml"/>
+            </descriptor>
+            <deploymentParameters/>
+            <errorHandling>
+                <errorRateThreshold action="terminate" value="0/1000"/>
+                <maxConsecutiveRestarts action="terminate" value="30"/>
+                <timeout max="100000" default="-1"/>
+            </errorHandling>
+            <checkpoint batch="10000" time="1000ms"/>
+        </casProcessor>
+        <casProcessor deployment="integrated" name="UmlsDictionaryLookupAnnotator">
+            <descriptor>
+                <import location="../../cTAKES/cTAKESdesc/lookupdesc/analysis_engine/DictionaryLookupAnnotatorUMLS.xml"/>
+            </descriptor>
+            <deploymentParameters/>
+            <errorHandling>
+                <errorRateThreshold action="terminate" value="0/1000"/>
+                <maxConsecutiveRestarts action="terminate" value="30"/>
+                <timeout max="100000" default="-1"/>
+            </errorHandling>
+            <checkpoint batch="10000" time="1000ms"/>
+        </casProcessor>
+        <casProcessor deployment="integrated" name="Feature Encoder for TxtVect">
+            <descriptor>
+                <import location="FeatureEncoderCasConsumer.xml"/>
+            </descriptor>
+            <deploymentParameters/>
+            <errorHandling>
+                <errorRateThreshold action="terminate" value="0/1000"/>
+                <maxConsecutiveRestarts action="terminate" value="30"/>
+                <timeout max="100000" default="-1"/>
+            </errorHandling>
+            <checkpoint batch="10000" time="1000ms"/>
+            <configurationParameterSettings>
+                <nameValuePair>
+                    <name>OutputDirectory</name>
+                    <value>
+                        <string>/Users/abhishek/Workspaces/DBMI/TextVect/output/i2b2Obesity_test</string>
+                    </value>
+                </nameValuePair>
+                <nameValuePair>
+                    <name>TrainingFile</name>
+                    <value>
+                        <string>/Users/abhishek/Workspaces/DBMI/TextVect/output/i2b2Obesity_train/encodedDataset.binary.arff</string>
+                    </value>
+                </nameValuePair>
+            </configurationParameterSettings>
+        </casProcessor>
+    </casProcessors>
+    <cpeConfig>
+        <numToProcess>-1</numToProcess>
+        <deployAs>immediate</deployAs>
+        <checkpoint batch="0" time="300000ms"/>
+        <timerImpl/>
+    </cpeConfig>
+</cpeDescription>

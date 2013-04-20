@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?><collectionReaderDescription xmlns="http://uima.apache.org/resourceSpecifier">
+  <frameworkImplementation>org.apache.uima.java</frameworkImplementation>
+  <implementationName>org.dbmi.uima.tools.components.idash.StandoffAnnotationCorpusReader</implementationName>
+  <processingResourceMetaData>
+    <name>Standoff Annotation Corpus Reader</name>
+    <description>Reads files from an MPQA style corpus. The path must comprise directories 'doc' and 'man_anns'. The subdirectories determine document names, and the file 'report.txt' contains the data and labels in these folders.</description>
+    <version>1.0</version>
+    <vendor>UCSD</vendor>
+    <configurationParameters>
+      <configurationParameter>
+        <name>CorpusLocation</name>
+        <description>Directory containing input files</description>
+        <type>String</type>
+        <multiValued>false</multiValued>
+        <mandatory>true</mandatory>
+      </configurationParameter>
+      <configurationParameter>
+        <name>Encoding</name>
+        <description>Character encoding for the documents.  If not specified,
+                   the default system encoding will be used.  Note that this parameter
+                   only applies if there is no CAS Initializer provided; otherwise,
+                   it is the CAS Initializer's responsibility to deal with character
+                   encoding issues.</description>
+        <type>String</type>
+        <multiValued>false</multiValued>
+        <mandatory>false</mandatory>
+      </configurationParameter>
+      <configurationParameter>
+        <name>Language</name>
+        <description>ISO language code for the documents</description>
+        <type>String</type>
+        <multiValued>false</multiValued>
+        <mandatory>false</mandatory>
+      </configurationParameter>
+      <configurationParameter>
+        <name>LabelNames</name>
+        <description>List of label names that we will record as classes in the CAS. All other annotations will be discarded.</description>
+        <type>String</type>
+        <multiValued>true</multiValued>
+        <mandatory>true</mandatory>
+      </configurationParameter>
+    </configurationParameters>
+    <configurationParameterSettings>
+      <nameValuePair>
+        <name>Language</name>
+        <value>
+          <string>en</string>
+        </value>
+      </nameValuePair>
+      <nameValuePair>
+        <name>LabelNames</name>
+        <value>
+          <array>
+            <string>VAR_Appendiceal_orifice</string>
+            <string>VAR_ASA</string>
+            <string>VAR_Biopsy</string>
+            <string>VAR_Cecum_(reached_it)</string>
+            <string>VAR_Ileo-cecal_valve</string>
+            <string>VAR_Informed_consent</string>
+            <string>VAR_Nursing_Reports</string>
+            <string>VAR_Prep_adequate</string>
+            <string>VAR_Procedure_aborted</string>
+            <string>VAR_Withdraw_time</string>
+          </array>
+        </value>
+      </nameValuePair>
+      <nameValuePair>
+        <name>CorpusLocation</name>
+        <value>
+          <string>/Users/abhishek/Workspaces/DBMI/TextVect/data/ColonoscopyCorpus</string>
+        </value>
+      </nameValuePair>
+    </configurationParameterSettings>
+    <typeSystemDescription>
+      <imports>
+        <import name="org.apache.uima.examples.SourceDocumentInformation"/>
+        <import name="ClassLabelType"/>
+      </imports>
+    </typeSystemDescription>
+    <capabilities>
+      <capability>
+        <inputs/>
+        <outputs>
+          <type allAnnotatorFeatures="true">org.apache.uima.examples.SourceDocumentInformation</type>
+          <type allAnnotatorFeatures="true">org.dbmi.uima.tools.components.idash.type.ClassLabel</type>
+        </outputs>
+        <languagesSupported/>
+      </capability>
+    </capabilities>
+    <operationalProperties>
+      <modifiesCas>true</modifiesCas>
+      <multipleDeploymentAllowed>false</multipleDeploymentAllowed>
+      <outputsNewCASes>true</outputsNewCASes>
+    </operationalProperties>
+  </processingResourceMetaData>
+</collectionReaderDescription>

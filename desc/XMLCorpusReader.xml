@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="UTF-8"?><collectionReaderDescription xmlns="http://uima.apache.org/resourceSpecifier">
+  <frameworkImplementation>org.apache.uima.java</frameworkImplementation>
+  <implementationName>org.dbmi.uima.tools.components.idash.XMLCorpusReader</implementationName>
+  <processingResourceMetaData>
+    <name>XML Corpus Reader</name>
+    <description>Reads files from an XML corpus. e.g. the i2b2 Obesity Challenge dataset, and the CMC 2007 Challenge dataset.</description>
+    <version>1.0</version>
+    <vendor>UCSD</vendor>
+    <configurationParameters>
+      <configurationParameter>
+        <name>DataFilePath</name>
+        <description>Path of the data file.</description>
+        <type>String</type>
+        <multiValued>false</multiValued>
+        <mandatory>true</mandatory>
+      </configurationParameter>
+      <configurationParameter>
+        <name>DocumentElementName</name>
+        <description>Name of the doc element containing a document.</description>
+        <type>String</type>
+        <multiValued>false</multiValued>
+        <mandatory>true</mandatory>
+      </configurationParameter>
+      <configurationParameter>
+        <name>DocumentIdAttribute</name>
+        <description>Attribute name containing the document id.</description>
+        <type>String</type>
+        <multiValued>false</multiValued>
+        <mandatory>true</mandatory>
+      </configurationParameter>
+      <configurationParameter>
+        <name>TagSurroundingText</name>
+        <description>The tag which holds the text content.</description>
+        <type>String</type>
+        <multiValued>false</multiValued>
+        <mandatory>true</mandatory>
+      </configurationParameter>
+
+      <configurationParameter>
+        <name>LabelFilePath</name>
+        <description>Path of the label file.</description>
+        <type>String</type>
+        <multiValued>false</multiValued>
+        <mandatory>true</mandatory>
+      </configurationParameter>
+      <configurationParameter>
+        <name>MultilabelLabelName</name>
+        <description>The tag that contains data about a label.</description>
+        <type>String</type>
+        <multiValued>false</multiValued>
+        <mandatory>true</mandatory>
+      </configurationParameter>
+      <configurationParameter>
+        <name>MultilabelLabelAttribute</name>
+        <description>The attribute that holds the name of the label.</description>
+        <type>String</type>
+        <multiValued>false</multiValued>
+        <mandatory>true</mandatory>
+      </configurationParameter>
+      <configurationParameter>
+        <name>MultilabelDocTag</name>
+        <description>The tag that holds the label info for a particular document.</description>
+        <type>String</type>
+        <multiValued>false</multiValued>
+        <mandatory>true</mandatory>
+      </configurationParameter>
+      <configurationParameter>
+        <name>MultilabelDocIdAttribute</name>
+        <description>Attribute that holds the document id.</description>
+        <type>String</type>
+        <multiValued>false</multiValued>
+        <mandatory>true</mandatory>
+      </configurationParameter>
+      <configurationParameter>
+        <name>MultilabelDocValueAttribute</name>
+        <description>Attribute that holds the value of the label (e.g. true / false).</description>
+        <type>String</type>
+        <multiValued>false</multiValued>
+        <mandatory>true</mandatory>
+      </configurationParameter>
+    </configurationParameters>
+
+    <configurationParameterSettings>
+      <nameValuePair>
+        <name>DocumentElementName</name>
+        <value>
+          <string>doc</string>
+        </value>
+      </nameValuePair>
+      <nameValuePair>
+        <name>DocumentIdAttribute</name>
+        <value>
+          <string>id</string>
+        </value>
+      </nameValuePair>
+      <nameValuePair>
+        <name>TagSurroundingText</name>
+        <value>
+          <string>text</string>
+        </value>
+      </nameValuePair>
+
+      <nameValuePair>
+        <name>MultilabelLabelName</name>
+        <value>
+          <string>disease</string>
+        </value>
+      </nameValuePair>
+      <nameValuePair>
+        <name>MultilabelLabelAttribute</name>
+        <value>
+          <string>name</string>
+        </value>
+      </nameValuePair>
+      <nameValuePair>
+        <name>MultilabelDocTag</name>
+        <value>
+          <string>doc</string>
+        </value>
+      </nameValuePair>
+      <nameValuePair>
+        <name>MultilabelDocIdAttribute</name>
+        <value>
+          <string>id</string>
+        </value>
+      </nameValuePair>
+      <nameValuePair>
+        <name>MultilabelDocValueAttribute</name>
+        <value>
+          <string>judgment</string>
+        </value>
+      </nameValuePair>
+
+      <nameValuePair>
+        <name>DataFilePath</name>
+        <value>
+          <string>/Users/abhishek/Workspaces/DBMI/TextVect/data/i2b2ObesityChallenge2008/data/obesity_patient_records_training.xml</string>
+        </value>
+      </nameValuePair>
+      <nameValuePair>
+        <name>LabelFilePath</name>
+        <value>
+          <string>/Users/abhishek/Workspaces/DBMI/TextVect/data/i2b2ObesityChallenge2008/labels/obesity_standoff_annotations_training.xml</string>
+        </value>
+      </nameValuePair>
+    </configurationParameterSettings>
+
+    <typeSystemDescription>
+      <imports>
+        <import name="org.apache.uima.examples.SourceDocumentInformation"/>
+        <import name="ClassLabelType"/>
+      </imports>
+    </typeSystemDescription>
+    <capabilities>
+      <capability>
+        <inputs/>
+        <outputs>
+          <type allAnnotatorFeatures="true">org.apache.uima.examples.SourceDocumentInformation</type>
+          <type allAnnotatorFeatures="true">org.dbmi.uima.tools.components.idash.type.ClassLabel</type>
+        </outputs>
+        <languagesSupported/>
+      </capability>
+    </capabilities>
+    <operationalProperties>
+      <modifiesCas>true</modifiesCas>
+      <multipleDeploymentAllowed>false</multipleDeploymentAllowed>
+      <outputsNewCASes>true</outputsNewCASes>
+    </operationalProperties>
+  </processingResourceMetaData>
+</collectionReaderDescription>

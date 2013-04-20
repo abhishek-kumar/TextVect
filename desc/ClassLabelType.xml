@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?><typeSystemDescription xmlns="http://uima.apache.org/resourceSpecifier">
+  <name>ClassLabelTypeSystem</name>
+  <description>This is a type System to store numerical labels for documents</description>
+  <version>1.0</version>
+  <vendor>UCSD</vendor>
+  <types>
+    <typeDescription>
+      <name>org.dbmi.uima.tools.components.idash.type.ClassLabel</name>
+      <description>Assigns a label to the document, with a numerical value</description>
+      <supertypeName>uima.tcas.Annotation</supertypeName>
+      <features>
+        <featureDescription>
+          <name>labelName</name>
+          <description/>
+          <rangeTypeName>uima.cas.String</rangeTypeName>
+        </featureDescription>
+        <featureDescription>
+          <name>labelValue</name>
+          <description/>
+          <rangeTypeName>uima.cas.String</rangeTypeName>
+        </featureDescription>
+      </features>
+    </typeDescription>
+  </types>
+</typeSystemDescription>

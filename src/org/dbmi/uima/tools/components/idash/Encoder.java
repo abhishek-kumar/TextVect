@@ -294,16 +294,19 @@ public class Encoder extends XmiWriterCasConsumer {
 			for(FeatureStructure fs : entity.getOntologyConceptArr().toArray()) {
 				OntologyConcept concept = (OntologyConcept) fs;
 				
+				// Get Negated status
+				String negated = "";
+				if (entity.getPolarity() == -1)
+					negated = "_NEGATED";
 				// Store the unique identifier for concept
 				// Note: We can store tui or code instead, if needed (could be made configurable)
 				if(concept.getCodingScheme().equals(SNOMED_CODING_SCHEME)) {
 					// Add cui
-					entityFeatureStats.process(((UmlsConcept) concept).getCui(), 1);
+					entityFeatureStats.process(((UmlsConcept) concept).getCui().concat(negated), 1);
 				} else if(concept.getCodingScheme().equals(RXNORM_CODING_SCHEME)) {
 					// Add Oui
-					entityFeatureStats.process(concept.getOui(), 1);
+					entityFeatureStats.process(concept.getOui().concat(negated), 1);
 				}
-				
 			}
 		}
 	}

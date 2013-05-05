@@ -51,16 +51,9 @@
         <name>LabelNames</name>
         <value>
           <array>
-            <string>VAR_Appendiceal_orifice</string>
-            <string>VAR_ASA</string>
-            <string>VAR_Biopsy</string>
-            <string>VAR_Cecum_(reached_it)</string>
-            <string>VAR_Ileo-cecal_valve</string>
-            <string>VAR_Informed_consent</string>
-            <string>VAR_Nursing_Reports</string>
-            <string>VAR_Prep_adequate</string>
-            <string>VAR_Procedure_aborted</string>
-            <string>VAR_Withdraw_time</string>
+            <string>diseaseState</string>
+            <string>qualityState</string>
+            <string>temporalState</string>
           </array>
         </value>
       </nameValuePair>

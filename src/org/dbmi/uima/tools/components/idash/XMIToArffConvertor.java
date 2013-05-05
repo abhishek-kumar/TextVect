@@ -246,6 +246,11 @@ public class XMIToArffConvertor {
 			// Finally encode the labels
 			encodeLabels(aJCas, attributePositions, values, dataset);
 			
+			
+			// DEBUG: check for a -1 value which causes errors
+			for (Integer i=0; i<values.length; ++i)
+				if (values[i] < 0)
+					logger.error("Value -1 found for attribute ".concat(i.toString()).concat(" file ").concat(inFile.getName()));
 	    	return values;
 	    } catch (ResourceInitializationException | SAXException | IOException | CASException e) {
 	    	throw new ResourceProcessException(e);

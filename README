@@ -1,0 +1,4 @@
+Setup directions:
+1. Install UIMA SDK (http://uima.apache.org/downloads.cgi#Latest Official Releases)
+2. Pull this git repo and import it as a project in Eclipse
+3. Add libraries to the project (External Jars) from Dropbox/Public/TextVect-lib

@@ -34,5 +34,7 @@
 		</attributes>
 	</classpathentry>
 	<classpathentry kind="var" path="UIMA_HOME/lib/uima-examples.jar"/>
+	<classpathentry kind="lib" path="/Users/abhishek/wekafiles/packages/LibLINEAR/lib/liblinear-1.92.jar"/>
+	<classpathentry kind="lib" path="/Users/abhishek/wekafiles/packages/LibLINEAR/LibLINEAR.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

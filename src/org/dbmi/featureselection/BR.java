@@ -1,17 +1,13 @@
+package org.dbmi.featureselection;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Enumeration;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Random;
-import java.util.Set;
 
 import org.apache.log4j.Logger;
 
-import weka.attributeSelection.ASEvaluation;
 import weka.attributeSelection.ASSearch;
 import weka.attributeSelection.BestFirst;
 import weka.attributeSelection.CfsSubsetEval;
@@ -20,27 +16,15 @@ import weka.attributeSelection.InfoGainAttributeEval;
 import weka.attributeSelection.Ranker;
 import weka.classifiers.Classifier;
 import weka.classifiers.Evaluation;
-import weka.classifiers.UpdateableClassifier;
 import weka.classifiers.functions.LibLINEAR;
-import weka.classifiers.functions.LibSVM;
-import weka.classifiers.functions.Logistic;
-import weka.classifiers.meta.AttributeSelectedClassifier;
-import weka.classifiers.meta.FilteredClassifier;
-import weka.core.Capabilities;
-import weka.core.Instance;
 import weka.core.Instances;
-import weka.core.OptionHandler;
 import weka.core.SelectedTag;
-import weka.core.WeightedInstancesHandler;
 import weka.filters.Filter;
 import weka.filters.supervised.attribute.AttributeSelection;
 import weka.filters.unsupervised.attribute.Remove;
-import weka.filters.unsupervised.attribute.RemoveByName;
-import weka.filters.unsupervised.instance.RemoveRange;
 
 
-public class BR implements Classifier, OptionHandler,
-		WeightedInstancesHandler, UpdateableClassifier {
+public class BR  {
 
 	int K; 						// number of labels 
 	List<String> labelNames;
@@ -51,59 +35,17 @@ public class BR implements Classifier, OptionHandler,
 	
 	// Feature selection decision
 	private boolean doFeatureSelection = false;
+	private boolean useGreedyFeatureSelection = false;
 	List<AttributeSelection> baseFilters;
 	Map<String, Integer> selectedLabels = null;
+	float avgNumSelectedLabels = 0;
 	
 	
 	private Logger logger = Logger.getLogger(getClass().getName());
 	
-
-	@Override
 	public void buildClassifier(Instances dataset_) throws Exception {
-		// Determine number of labels, K
+		// Determine number of labels, K; and the label names
 		getLabelInfo(dataset_);
-		
-		// Create K classifiers, one for each label  
-		/*
-		baseClassifiers = new ArrayList<Classifier>(K);
-		baseLabelFilters = new ArrayList<Remove>(K);
-		baseFilters = new ArrayList<AttributeSelection>(K);
-		
-		for (int i = 0; i < K; ++i) {
-			//Instances dataset = new Instances(dataset_);
-			dataset_.setClassIndex(labelIndex.get(labelNames.get(i)));
-			Remove remove = getRemoveOtherLabels(i, dataset_);
- 			baseLabelFilters.add(remove);
-			Instances baseDataset = Filter.useFilter(dataset_, remove);
-			logger.info("... After removing other labels, num attributes = " + baseDataset.numAttributes());
-			
-			if (doFeatureSelection) {
-				//baseDataset.setClassIndex(labelIndex.get(labelNames.get(i)));
-				AttributeSelection as = createFeatureSelectionFilter(baseDataset); 
-				baseDataset = Filter.useFilter(baseDataset, as);
-				baseFilters.add(as); 
-				logger.info("... After feature selection, num attributes = " + baseDataset.numAttributes());
-			}
-			
-			double bestC = gridSearchC(baseDataset);
-			logger.debug("... best regularization parameter is " + bestC );
-			
-			
-			LibLINEAR LR = createLRClassifier();
-			LR.setCost(bestC);
-			LR.buildClassifier(baseDataset);
-			
-			baseClassifiers.add(LR);
-			//FilteredClassifier fc = new FilteredClassifier();
-			//fc.setFilter(remove);
-			//fc.setClassifier(LR);
-			//fc.buildClassifier(dataset);
-			//baseClassifiers.add(fc);
-			logger.info("Built classifier for " + labelNames.get(i) + " successfully.");
-			System.gc();
-		}
-				
-		*/
 	}
 
 	/**
@@ -154,16 +96,7 @@ public class BR implements Classifier, OptionHandler,
 		return Math.pow(10, best_c_exp);
 	}
 	
-	@Override
-	public double classifyInstance(Instance arg0) throws Exception {
-		// TODO Auto-generated method stub
-		return 0;
-	}
 
-	@Override
-	public double[] distributionForInstance(Instance arg0) throws Exception {
-		throw new UnsupportedOperationException("Use double[] classifyMLInstance() instead");
-	}
 	/**
 	 * Classify all labels for a given instance and return y_hat
 	 */
@@ -208,6 +141,7 @@ public class BR implements Classifier, OptionHandler,
 		int m = testSet.numInstances();
 		double[][] predictions = new double[m][K];
 		selectedLabels = new HashMap<>();
+		avgNumSelectedLabels = 0;
 		
 		// for each label
 		for(int j=0; j<K; ++j) {
@@ -228,6 +162,8 @@ public class BR implements Classifier, OptionHandler,
 				logger.info("... After feature selection, num attributes = " + baseTrainingDataset.numAttributes());
 				incrementFeatureCount(selectedLabels, baseTrainingDataset);
 			}
+			avgNumSelectedLabels += baseTrainingDataset.numAttributes();
+
 			
 			// Build classifier
 			double bestC = gridSearchC(baseTrainingDataset);
@@ -243,18 +179,13 @@ public class BR implements Classifier, OptionHandler,
 				predictions[i][j] = LR.classifyInstance(baseTestDataset.instance(i));
 			System.gc();
 		}
+		avgNumSelectedLabels /= K;
 		StringBuilder sb = new StringBuilder("Number of times each selected feature was selected:\n");
 		for (Entry<String, Integer> entry : selectedLabels.entrySet())
 			sb.append(entry.getKey()).append("\t: ").append(entry.getValue()).append("\n");
 		
 		logger.debug(sb.toString());
 		return predictions;
-	}
-	
-	@Override
-	public Capabilities getCapabilities() {
-		// TODO Auto-generated method stub
-		return null;
 	}
 	
 	public List<String> getLabelNames() {
@@ -265,31 +196,6 @@ public class BR implements Classifier, OptionHandler,
 		return labelIndex;
 	}
 
-
-	@Override
-	public void updateClassifier(Instance arg0) throws Exception {
-		throw new UnsupportedOperationException(
-				"Training is done in buildClassifier. " +
-				"Single instance based update is not supported.");
-	}
-
-	@Override
-	public String[] getOptions() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public Enumeration listOptions() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public void setOptions(String[] arg0) throws Exception {
-		// TODO Auto-generated method stub
-
-	}
 	
 	private LibLINEAR createLRClassifier() {
 		LibLINEAR LibL = new LibLINEAR();
@@ -298,39 +204,33 @@ public class BR implements Classifier, OptionHandler,
 		return LibL;
 	}
 	
-	private Classifier getBaseClassifier(Classifier base) {
-		if (!doFeatureSelection)
-			return base;
-		AttributeSelectedClassifier classifier = new AttributeSelectedClassifier();
-		CfsSubsetEval eval = new CfsSubsetEval();
-		GreedyStepwise search = new GreedyStepwise();
-		search.setSearchBackwards(true);
-		
-		classifier.setClassifier(base);
-		classifier.setEvaluator(eval);
-		classifier.setSearch(search);
-		
-		return classifier;
-	}
 	
 	private AttributeSelection createFeatureSelectionFilter(Instances dataset) throws Exception {
 		AttributeSelection as = new AttributeSelection();
 		CfsSubsetEval eval = new CfsSubsetEval();
-		//GreedyStepwise search = new GreedyStepwise();
-		BestFirst search = new BestFirst();
-		search.setDirection(new SelectedTag(1, BestFirst.TAGS_SELECTION));
-		//search.setSearchBackwards(false);
 		as.setEvaluator(eval);
-		as.setSearch(search);
+		
+		// Select the feature selection method
+		ASSearch searchMethod = null;
+		if (useGreedyFeatureSelection) {
+			GreedyStepwise search = new GreedyStepwise();
+			search.setSearchBackwards(false);
+			searchMethod = search;
+			logger.debug("Using greedy feature selection method");
+		} else {
+			BestFirst search = new BestFirst();
+			search.setDirection(new SelectedTag(1, BestFirst.TAGS_SELECTION));
+			searchMethod = search;
+			logger.debug("Using bestfirst feature selection method");
+		}
+		as.setSearch(searchMethod);
 		as.setInputFormat(dataset);
-		//for (int inst=0; inst<dataset.numInstances(); inst++)
-		//	as.input(dataset.instance(inst));
-		//as.batchFinished();
 		return as;
 	}
 	
-	public void setFeatureSelection(boolean status) {
+	public void setFeatureSelection(boolean status, boolean useGreedyMethod) {
 		doFeatureSelection = status;
+		useGreedyFeatureSelection = useGreedyMethod;
 	}
 	
 	private Remove getRemoveOtherLabels(int labelNo, Instances dataset) throws Exception {
@@ -368,7 +268,7 @@ public class BR implements Classifier, OptionHandler,
 		int[] attributeRanks = ranker.search(ig, dataset);
 		StringBuilder sb = new StringBuilder("Top 5 Features for the label " + 
 				dataset.attribute(dataset.classIndex()).name() + "\n\t");
-		for (int i = 0; i < 5; ++i)
+		for (int i = 0; i < Math.min(3, attributeRanks.length); ++i)
 			sb.append(dataset.attribute(attributeRanks[i]).name()
 					.replaceAll("Entities_", "UMLS CUI (")
 					.replaceAll("Words_", "Word token `")

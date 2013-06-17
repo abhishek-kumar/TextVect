@@ -1,0 +1,48 @@
+Things that didnt work with the script and have to be done manually:
+
+- git clone http://v3nlp.bmi.utah.edu/gitblit/git/derma/type.descriptor
+- git clone http://decipher.chpc.utah.edu/gitblit/git/bones/flap
+- Download and setup word/ from the website http://v3nlp.bmi.utah.edu/gitblit/word; and run "mvn install"
+- Download and setup type.descriptor/ from the website http://v3nlp.bmi.utah.edu/gitblit/type.descriptor; and run "mvn install"
+- Download and setup framework-core/ from the website http://v3nlp.bmi.utah.edu/gitblit/summary/derma!framework-core.git; and run "mvn install"
+
+NOTES:
+
+check up version of dependency "cTAKES" whenever build fails
+copy over to create utils.general.jar and utils.install.jar in flapPipelines/target/lib
+
+
+
+ECLIPSE and UIMA
+- Setup new eclipse version
+- Install EMF (core SDK only) through Help -> Install new software (URL: EMF - http://download.eclipse.org/modeling/emf/emf/updates/releases/)
+- Install UIMA plugins (URL: http://www.apache.org/dist/uima/eclipse-update-site)
+- Install UIMA SDK 
+    * Download from apache website, copy the extracted folder to some location
+    * Add environment var UIMA_HOME pointing to this extracted folder (add in plist Environment file, not .bash_profile or .bashrc)
+    * Run $UIMA_HOME/bin/adjustExamplePaths.sh
+    * In eclipse, add a classpath variable UIMA_HOME pointing to the apache-uima folder extracted above
+- File -> Import -> General/Existing Project. Select the apache-uima root directory (as before extracted)
+- Right click each jar file in the project explorer, click properties, and add javadoc location to $UIMA_HOME/docs/d/api (full path)
+
+- go to DERMA_HOME (usually like derma_2013.01.31)
+- type:
+  $ mvn -Declipse.workspace=/Users/abhishek/Documents/workspace eclipse:add-maven-repo
+  $ mvn -Declipse.workspace=/Users/abhishek/Documents/workspace eclipse:configure-workspace
+  $ mvn eclipse:eclipse
+  $ cd word/; mvn eclipse:eclipse
+  $ cd type.descriptor; mvn eclipse:eclipse
+  $ cd framework-core; mvn eclipse:eclipse
+
+ - Open eclipse, File -> import -> General/Existing Projects -> DERMA_HOME directory
+ - Double check that a classpath exists in Preferences -> Java -> Classpath named "M2_REPO"
+
+ At this point, there will be build problems related to missing libraries in m2 repository
+ Correct them one by one by copying the required jar files to the repo
+
+ * cp commons-lang-2.6.jar ~/.m2/repository/commons-lang/commons-lang/2.6/ (copy from mastif/assertion/lib)
+ * cp -r resources/src/main/resources ~/.m2/repository/
+
+
+ RUNCONFIGURATIONS: => Classpaths => Add projects => Add all projects.
+

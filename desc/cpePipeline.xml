@@ -3,16 +3,16 @@
     <collectionReader>
         <collectionIterator>
             <descriptor>
-                <import location="XMLCorpusReader.xml"/>
+                <import location="StandoffAnnotationCorpusReader.xml"/>
             </descriptor>
-            <!--configurationParameterSettings>
+            <configurationParameterSettings>
                 <nameValuePair>
-                    <name>InputDirectory</name>
+                    <name>CorpusLocation</name>
                     <value>
-                        <string>/Users/abhishek/Workspaces/DBMI/TextVect/data/ColonoscopyCorpus</string>
+                        <string>/Users/abhishek/Workspaces/DBMI/TextVect/data/PulmonaryEmbolismDataset/train</string>
                     </value>
                 </nameValuePair>
-            </configurationParameterSettings-->
+            </configurationParameterSettings>
         </collectionIterator>
     </collectionReader>
     <casProcessors casPoolSize="3" processingUnitThreadCount="1">
@@ -139,6 +139,30 @@
         <casProcessor deployment="integrated" name="UmlsDictionaryLookupAnnotator">
             <descriptor>
                 <import location="../../cTAKES/cTAKESdesc/lookupdesc/analysis_engine/DictionaryLookupAnnotatorUMLS.xml"/>
+            </descriptor>
+            <deploymentParameters/>
+            <errorHandling>
+                <errorRateThreshold action="terminate" value="0/1000"/>
+                <maxConsecutiveRestarts action="terminate" value="30"/>
+                <timeout max="100000" default="-1"/>
+            </errorHandling>
+            <checkpoint batch="10000" time="1000ms"/>
+        </casProcessor>
+        <casProcessor deployment="integrated" name="ConceptConvertor">
+            <descriptor>
+                <import location="../../cTAKES/cTAKESdesc/assertiondesc/conceptConverterAnalysisEngine.xml"/>
+            </descriptor>
+            <deploymentParameters/>
+            <errorHandling>
+                <errorRateThreshold action="terminate" value="0/1000"/>
+                <maxConsecutiveRestarts action="terminate" value="30"/>
+                <timeout max="100000" default="-1"/>
+            </errorHandling>
+            <checkpoint batch="10000" time="1000ms"/>
+        </casProcessor>
+        <casProcessor deployment="integrated" name="AssertionAnnotator">
+            <descriptor>
+                <import location="../../cTAKES/cTAKESdesc/assertiondesc/assertionAnalysisEngine.xml"/>
             </descriptor>
             <deploymentParameters/>
             <errorHandling>

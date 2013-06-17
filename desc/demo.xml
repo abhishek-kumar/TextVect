@@ -2,11 +2,11 @@
     <collectionReader>
         <collectionIterator>
             <descriptor>
-                <import location="StandoffAnnotationCorpusReader.xml"/>
+                <import location="XMLCorpusReader.xml"/>
             </descriptor>
             <configurationParameterSettings>
                 <nameValuePair>
-                    <name>CorpusLocation</name>
+                    <name>DataFilePath</name>
                     <value>
                         <string>/Users/abhishek/Workspaces/DBMI/TextVect/data/i2b2ObesityChallenge2008/data/obesity_patient_records_test.xml</string>
                     </value>

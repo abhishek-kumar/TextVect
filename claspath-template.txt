@@ -25,7 +25,6 @@
 	<classpathentry kind="lib" path="UIMA_HOME_LIB/uima-adapter-vinci.jar"/>
 	<classpathentry kind="lib" path="UIMA_HOME_LIB/uima-adapter-soap.jar"/>
 	<classpathentry kind="lib" path="UIMA_HOME_LIB/jVinci.jar"/>
-	<classpathentry combineaccessrules="false" kind="src" path="/cTAKES"/>
 	<classpathentry kind="lib" path="ROOT/lib/log4j-1.2.15.jar"/>
 	<classpathentry kind="lib" path="ROOT/desc"/>
 	<classpathentry kind="lib" path="ROOT/lib/weka-3-7-5.jar">

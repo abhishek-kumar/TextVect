@@ -59,6 +59,7 @@ if [ ! -d "$ROOT/lib" ]; then
 fi
 
 # Update ".classpath" to point to correct directories
+cp claspath-template.txt .classpath
 sed -i "s#UIMA_HOME_LIB#$UIMA_HOME/lib#g" .classpath
 sed -i "s#UIMA_HOME#$UIMA_HOME#g" .classpath
 sed -i "s#ROOT#$ROOT#g" .classpath

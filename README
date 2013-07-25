@@ -3,3 +3,27 @@ Setup directions:
 2. Pull this git repo and import it as a project in Eclipse
 3. Add libraries to the project (Right click project, click properties, go to libraries, and select 'Add External Jars') from :
 https://docs.google.com/file/d/0ByuM39EqP7uhU1dyNkxEamttNTQ/edit?usp=sharing
+
+Apache cTAKES
+===============================
+Detail documentation could found on:
+http://incubator.apache.org/ctakes
+
+Requirements
+-----------
+Apache cTAKES
+UMLS Username and Password
+https://uts.nlm.nih.gov/license.html
+
+Requirements
+-----------
+This resources package contains the umls resources
+Please unpack the contents of the resources folder
+and ADD (do not replace) into {CTAKES_HOME}/resources directory
+
+Notes
+-----------
+If you plan to use the UMLS Resources, set/export env variables
+export ctakes.umlsuser=[username], ctakes.umlspw=[password]
+or add the system properties to the java args
+-Dctakes.umlsuser=[username] -Dctakes.umlspw=[password]

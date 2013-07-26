@@ -1,16 +1,35 @@
 #!/bin/bash
 
+# colors
+c_bold=
+c_red=
+c_yellow=
+c_green=
+if [ $TERM = 'xterm-256color' ]; then
+  c_bold=`tput setaf 0`
+  c_red=`tput setaf 1`
+  c_yellow=`tput setaf 3`
+  c_green=`tput setaf 2`
+  c_end=`tput sgr0`
+else
+  c_bold='[1m'
+  c_red='[1;31m'
+  c_yellow='[1;36m'
+  c_green='[1;32m'
+  c_end='[0m'
+fi
+
 [ ! -d "`pwd`/scripts" ] && cd ..
 ROOT="`pwd`"
 if [ ! -d "$ROOT/scripts" ]; then
-  echo -e "\e[00;31m    Please run this script from the root directory of the repository (the directory that contains the 'src' folder). \e[00m"
+  echo -e "${c_red}    Please run this script from the root directory of the repository (the directory that contains the 'src' folder). ${c_end}"
   exit 1
 fi
 
 # Java must be installed on the machine
 JAVA=`which java`
 if [ ! -f $JAVA ]; then
-  echo -e "\e[00;31m    Java does not seem to be installed. Please install Java and re run this script. \e[00m"
+  echo -e "${c_red}    Java does not seem to be installed. Please install Java and re run this script. ${c_end}"
   exit 1
 fi
 
@@ -19,21 +38,21 @@ if [ -z "$UIMA_HOME" ]; then
   UIMA_HOME="`pwd`/apache-uima"
 fi
 if [ ! -d "$UIMA_HOME" ]; then
-  echo -e "\e[1;33mDownloading Apache UIMA\e[0m"
+  echo -e "${c_yellow}Downloading Apache UIMA${c_end}"
   curl -o uimaj-2.4.0-bin.zip http://www.bizdirusa.com/mirrors/apache//uima//uimaj-2.4.0/uimaj-2.4.0-bin.zip
   unzip uimaj-2.4.0-bin.zip
   rm uimaj-2.4.0-bin.zip
   if [ ! -d "$UIMA_HOME" ]; then
-    echo -e "\e[00;31m    Error downloading Apache UIMA Java Framework and SDK to $UIMA_HOME. Please download and install it from\e[00m"
-    echo -e "\e[00;31m    http://uima.apache.org/downloads.cgi#Latest \e[00m"
-    echo -e "\e[00;31m    After installing, please create an environment variable UIMA_HOME that points to the installation.\e[00m"
+    echo -e "${c_red}    Error downloading Apache UIMA Java Framework and SDK to $UIMA_HOME. Please download and install it from${c_end}"
+    echo -e "${c_red}    http://uima.apache.org/downloads.cgi#Latest ${c_end}"
+    echo -e "${c_red}    After installing, please create an environment variable UIMA_HOME that points to the installation.${c_end}"
     exit 1
   fi
 fi
 
 # If you want to use the latest cTakes version, uncomment this block.
 # if [ ! -d "$ROOT/apache-ctakes-3.0.0-incubating" ]; then
-#   echo -e "\e[1;33mDownloading cTAKES (please wait)\e[0m"
+#   echo -e "${c_yellow}Downloading cTAKES (please wait)${c_end}"
 #   curl -o apache-ctakes-3.0.0-incubating-bin.zip http://www.globalish.com/am//incubator/ctakes/apache-ctakes-3.0.0-incubating-bin.zip
 #   unzip apache-ctakes-3.0.0-incubating-bin.zip
 #   rm apache-ctakes-3.0.0-incubating-bin.zip
@@ -49,7 +68,7 @@ fi
 
 # Library files
 if [ ! -d "$ROOT/lib" ]; then
-  echo -e "\e[1;33mDownloading Library Jar files\e[0m"
+  echo -e "${c_yellow}Downloading Library Jar files${c_end}"
   curl -o TextVect-lib.zip https://dl.dropboxusercontent.com/u/3091691/TextVect-lib/TextVect-lib.zip
   mkdir lib
   unzip TextVect-lib.zip
@@ -60,7 +79,7 @@ fi
 
 # Sample data files
 if [ ! -d "$ROOT/data" ]; then
-  echo -e "\e[1;33mDownloading sample datasets (please request permission before using them)\e[0m"
+  echo -e "${c_yellow}Downloading sample datasets (please request permission before using them)${c_end}"
   curl -o data.zip https://dl.dropboxusercontent.com/u/3091691/TextVect-lib/data.zip
   mkdir data
   unzip data.zip -d data
@@ -77,5 +96,5 @@ export UIMA_HOME
 export ROOT
 export JAVA
 
-echo -e "\e[1;32mInstall check successful!\e[0m"
+echo -e "${c_green}Install check successful!${c_end}"
 

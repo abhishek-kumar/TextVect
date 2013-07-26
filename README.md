@@ -22,7 +22,8 @@ Setup
 
 Run
 ================================
-Run TextVect
+1. Run TextVect
 
-    ./script/run.sh
-
+        ./script/run.sh
+2. In the new window that opens, go to the 'File' menu and click 'Open CPE Descriptor'
+3. Select the file 'cpePipeline.xml' from the 'desc' directory.

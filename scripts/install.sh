@@ -20,7 +20,7 @@ if [ -z "$UIMA_HOME" ]; then
 fi
 if [ ! -d "$UIMA_HOME" ]; then
   echo -e "\e[1;33mDownloading Apache UIMA\e[0m"
-  wget http://www.bizdirusa.com/mirrors/apache//uima//uimaj-2.4.0/uimaj-2.4.0-bin.zip
+  curl -o uimaj-2.4.0-bin.zip http://www.bizdirusa.com/mirrors/apache//uima//uimaj-2.4.0/uimaj-2.4.0-bin.zip
   unzip uimaj-2.4.0-bin.zip
   rm uimaj-2.4.0-bin.zip
   if [ ! -d "$UIMA_HOME" ]; then
@@ -34,12 +34,12 @@ fi
 # If you want to use the latest cTakes version, uncomment this block.
 # if [ ! -d "$ROOT/apache-ctakes-3.0.0-incubating" ]; then
 #   echo -e "\e[1;33mDownloading cTAKES (please wait)\e[0m"
-#   wget http://www.globalish.com/am//incubator/ctakes/apache-ctakes-3.0.0-incubating-bin.zip
+#   curl -o apache-ctakes-3.0.0-incubating-bin.zip http://www.globalish.com/am//incubator/ctakes/apache-ctakes-3.0.0-incubating-bin.zip
 #   unzip apache-ctakes-3.0.0-incubating-bin.zip
 #   rm apache-ctakes-3.0.0-incubating-bin.zip
 #   mkdir tmp
 #   cd tmp
-#   wget http://sourceforge.net/projects/ctakesresources/files/ctakes-resources-3.0.1.zip
+#   curl -o ctakes-resources-3.0.1.zip http://sourceforge.net/projects/ctakesresources/files/ctakes-resources-3.0.1.zip
 #   unzip ctakes-resources-3.0.1.zip
 #   rm ctakes-resources-3.0.1.zip
 #   cp -R ./resources/* ../apache-ctakes-3.0.0-incubating/resources
@@ -50,7 +50,7 @@ fi
 # Library files
 if [ ! -d "$ROOT/lib" ]; then
   echo -e "\e[1;33mDownloading Library Jar files\e[0m"
-  wget https://dl.dropboxusercontent.com/u/3091691/TextVect-lib/TextVect-lib.zip
+  curl -o TextVect-lib.zip https://dl.dropboxusercontent.com/u/3091691/TextVect-lib/TextVect-lib.zip
   mkdir lib
   unzip TextVect-lib.zip
   cp TextVect-lib/* lib/
@@ -61,7 +61,7 @@ fi
 # Sample data files
 if [ ! -d "$ROOT/data" ]; then
   echo -e "\e[1;33mDownloading sample datasets (please request permission before using them)\e[0m"
-  wget https://dl.dropboxusercontent.com/u/3091691/TextVect-lib/data.zip
+  curl -o data.zip https://dl.dropboxusercontent.com/u/3091691/TextVect-lib/data.zip
   mkdir data
   unzip data.zip -d data
   rm data.zip
@@ -69,9 +69,9 @@ fi
 
 # Update ".classpath" to point to correct directories
 cp claspath-template.txt .classpath
-sed -i "s#UIMA_HOME_LIB#$UIMA_HOME/lib#g" .classpath
-sed -i "s#UIMA_HOME#$UIMA_HOME#g" .classpath
-sed -i "s#ROOT#$ROOT#g" .classpath
+sed -e "s#UIMA_HOME_LIB#$UIMA_HOME/lib#g" -i .bak .classpath
+sed -e "s#UIMA_HOME#$UIMA_HOME#g" -i .bak .classpath
+sed -e "s#ROOT#$ROOT#g" -i .bak .classpath
 
 export UIMA_HOME
 export ROOT

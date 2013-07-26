@@ -1,18 +1,5 @@
 package org.dbmi.uima.tools.components.idash;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileReader;
-import java.io.IOException;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-
 import org.apache.log4j.Logger;
 import org.apache.uima.cas.CAS;
 import org.apache.uima.cas.CASException;
@@ -23,30 +10,41 @@ import org.apache.uima.cas.impl.XmiCasDeserializer;
 import org.apache.uima.cas.text.AnnotationIndex;
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.jcas.tcas.Annotation;
-import org.apache.uima.resource.ResourceConfigurationException;
 import org.apache.uima.resource.ResourceInitializationException;
 import org.apache.uima.resource.ResourceProcessException;
 import org.apache.uima.util.CasCreationUtils;
 import org.dbmi.uima.tools.components.idash.type.ClassLabel;
 import org.xml.sax.SAXException;
 
+import weka.core.Attribute;
+import weka.core.Instances;
+import weka.core.SparseInstance;
+import weka.core.converters.ArffSaver;
+
 import edu.mayo.bmi.uima.core.type.refsem.OntologyConcept;
 import edu.mayo.bmi.uima.core.type.refsem.UmlsConcept;
 import edu.mayo.bmi.uima.core.type.syntax.WordToken;
 import edu.mayo.bmi.uima.core.type.textsem.EntityMention;
 
-import weka.core.Attribute;
-import weka.core.FastVector;
-import weka.core.Instances;
-import weka.core.SparseInstance;
-import weka.core.converters.ArffSaver;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 /**
  * Convert all XMI files in a given directory into one single
  * encoded ARFF file.
  * Not thread-safe.
  * 
- * @author abhishek
+ * @author abhishek.kumar.ak@gmail.com (Abhishek Kumar)
  *
  */
 public class XMIToArffConvertor {
@@ -64,7 +62,7 @@ public class XMIToArffConvertor {
 	
 	/* Labels and their class values, if we are encoding nominal labels */
 	Map<String, Set<String>> labelClasses = null;
-	Map<String, FastVector> labelClassesWeka = null;
+	Map<String, ArrayList<String>> labelClassesWeka = null;
 	
 	/* Document frequencies of terms, as read from training set when we are encoding test set */
 	Map<String, Double> trainingSetDocumentFrequency;
@@ -122,7 +120,7 @@ public class XMIToArffConvertor {
 	    	throw new IOException("Directory not found: ".concat(mOutputDir.getAbsolutePath()));
 	    
   	  	File[] files = mOutputDir.listFiles();
-  	  	FastVector attributes = new FastVector();
+  	  	ArrayList<Attribute> attributes = new ArrayList<Attribute>();
   	  	HashMap<String, Integer> attributePositions = new HashMap<String, Integer>();
   	  	int position = 0;
   	  	trainingSetDocumentFrequency = null;
@@ -131,23 +129,20 @@ public class XMIToArffConvertor {
   	  	if ( (trainingSetFileName != null) && !trainingSetFileName.isEmpty()) {
   	  		BufferedReader reader = new BufferedReader(new FileReader(trainingSetFileName));
   	  		Instances trainingSet = new Instances(reader);
-  	  		labelClassesWeka = new HashMap<String, FastVector>();
+  	  		labelClassesWeka = new HashMap<String, ArrayList<String>>();
   	  		for (int i=0; i<trainingSet.numAttributes(); ++i) {
   	  			Attribute a = trainingSet.attribute(i);
   	  			
   	  			if (a.isNominal()) {
-  	  				List<String> labelValues = Collections.list(a.enumerateValues());
-  	  				FastVector attributeValues = new FastVector(labelValues.size());
-  	  				for (String value : labelValues)
-  	  					attributeValues.addElement(value);
+  	  				@SuppressWarnings("unchecked")
+                    ArrayList<String> attributeValues = Collections.list(a.enumerateValues());
   	  				labelClassesWeka.put(a.name(), attributeValues);
-  	  				attributes.addElement( new Attribute(a.name(), attributeValues) );
+  	  				attributes.add( new Attribute(a.name(), attributeValues) );
   	  			} else if(a.isString())
-  	  				attributes.addElement( new Attribute(a.name(), (FastVector) null) );
+  	  				attributes.add( new Attribute(a.name(), (ArrayList<String>) null) );
   	  			else
-  	  				attributes.addElement( new Attribute(a.name()) );
+  	  				attributes.add( new Attribute(a.name()) );
   	  			attributePositions.put(a.name(), i);
-  	  			
   	  		}
   	  		
   	  		// get the df values from training set
@@ -156,7 +151,7 @@ public class XMIToArffConvertor {
   	  		// This is a fresh training set.
   	  		
   	  		// Add a string feature to hold doc name
-  	  	  	attributes.addElement(new Attribute("DocumentName", (FastVector) null));
+  	  	  	attributes.add(new Attribute("DocumentName", (ArrayList<String>) null));
   	  	  	attributePositions.put("DocumentName", position++);
   	  	  	
   	  	  	// Map each feature (or term) to a unique position in the attribute list. 
@@ -164,23 +159,23 @@ public class XMIToArffConvertor {
   	  	  	for(String featureGroupName : featureGroupsToEncode) {
   		  	  	for(String term : stats.get(featureGroupName).getTerms()) {
   		  	  		String attributeName = featureGroupName.concat("_").concat(term);
-  			  		attributes.addElement(new Attribute(attributeName));
+  			  		attributes.add(new Attribute(attributeName));
   			  		attributePositions.put(attributeName, position++);
   			  	}
   	  	  	}
   	  	  	
   	  	  	// Add labels
   	  	  	logger.info("Adding label data to dataset:" + labelClasses.toString());
-  	  	  	labelClassesWeka = new HashMap<String, FastVector>();
+  	  	  	labelClassesWeka = new HashMap<String, ArrayList<String>>();
   	  	  	for (String labelName : labelClasses.keySet()) {
   	  	  		Set<String> labelValues = labelClasses.get(labelName);
   	  	  		
   	  	  		String attributeName = new StringBuilder(Encoder.LABELS).append("_").append(labelName).toString();
-  	  	  		FastVector attributeValues = new FastVector(labelValues.size());
+  	  	  		ArrayList<String> attributeValues = new ArrayList<String>(labelValues.size());
   	  	  		for (String value : labelValues)
-  	  	  			attributeValues.addElement(value);
+  	  	  			attributeValues.add(value);
   	  	  		
-  	  	  		attributes.addElement(new Attribute(attributeName, attributeValues));
+  	  	  		attributes.add(new Attribute(attributeName, attributeValues));
   	  	  		attributePositions.put(attributeName, position++);
   	  	  		labelClassesWeka.put(attributeName, attributeValues);
   	  	  	}
@@ -213,7 +208,6 @@ public class XMIToArffConvertor {
 	/**
 	 * Given a CAS in an XMI file, read the file and write out a feature vector.
 	 * @param inFile XMI file to encode. Cannot be null
-	 * @param typeSystemCAS Type system of the XMI files to be read. Cannot be null
 	 * @param attributePositions mapping between attribute name and its position in the feature vector
 	 * @param dataset the dataset to write to (output)
 	 * @throws ResourceProcessException
@@ -435,7 +429,7 @@ public class XMIToArffConvertor {
 			for (int i=0; i<m; ++i)
 				if (trainingSet.instance(i).value(j) > 0.0)
 					++count;
-			double df = count / ((double) m);
+			double df = count / m;
 			trainingSetDocumentFrequency.put(trainingSet.attribute(j).name(), df);
 			sb.append("\n\tAttribute ").append(j).append(". df=").append(df);
 		}

@@ -23,9 +23,10 @@ public class ClassLabel_Type extends Annotation_Type {
   /** @generated */
   private final FSGenerator fsGenerator = 
     new FSGenerator() {
+      @Override
       public FeatureStructure createFS(int addr, CASImpl cas) {
   			 if (ClassLabel_Type.this.useExistingInstance) {
-  			   // Return eq fs instance if already created
+  			 // Return eq fs instance if already created
   		     FeatureStructure fs = ClassLabel_Type.this.jcas.getJfsFromCaddr(addr);
   		     if (null == fs) {
   		       fs = new ClassLabel(addr, ClassLabel_Type.this);

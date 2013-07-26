@@ -1,46 +1,19 @@
 package org.dbmi.uima.tools.components.idash;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Map;
-import java.util.Set;
-
 import org.apache.log4j.Logger;
-import org.apache.uima.UIMAFramework;
 import org.apache.uima.cas.CAS;
 import org.apache.uima.cas.CASException;
 import org.apache.uima.cas.FSIterator;
 import org.apache.uima.cas.FeatureStructure;
 import org.apache.uima.cas.TypeSystem;
-import org.apache.uima.cas.impl.XmiCasDeserializer;
-import org.apache.uima.cas.text.AnnotationIndex;
-import org.apache.uima.collection.CollectionException;
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.jcas.tcas.Annotation;
-import org.apache.uima.resource.ResourceConfigurationException;
 import org.apache.uima.resource.ResourceInitializationException;
 import org.apache.uima.resource.ResourceProcessException;
-import org.apache.uima.resource.metadata.TypeSystemDescription;
 import org.apache.uima.tools.components.XmiWriterCasConsumer;
-import org.apache.uima.util.CasCreationUtils;
-import org.apache.uima.util.InvalidXMLException;
 import org.apache.uima.util.ProcessTrace;
-import org.apache.uima.util.XMLInputSource;
 import org.dbmi.uima.tools.components.idash.type.ClassLabel;
-import org.xml.sax.SAXException;
 
-import com.sun.xml.internal.bind.v2.runtime.unmarshaller.XsiNilLoader.Array;
-import com.sun.xml.internal.ws.resources.EncodingMessages;
-
-import weka.core.Attribute;
-import weka.core.FastVector;
-import weka.core.Instances;
-import weka.core.SparseInstance;
-import weka.core.converters.ArffSaver;
 import edu.mayo.bmi.uima.core.type.refsem.OntologyConcept;
 import edu.mayo.bmi.uima.core.type.refsem.UmlsConcept;
 import edu.mayo.bmi.uima.core.type.syntax.NumToken;
@@ -49,6 +22,14 @@ import edu.mayo.bmi.uima.core.type.textsem.DateAnnotation;
 import edu.mayo.bmi.uima.core.type.textsem.EntityMention;
 import edu.mayo.bmi.uima.core.type.textsem.FractionAnnotation;
 import edu.mayo.bmi.uima.core.type.textsem.TimeAnnotation;
+
+import java.io.File;
+import java.io.IOException;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Map;
+import java.util.Set;
 
 /**
  * Analysis engine that encodes annotated features into a feature vector.
@@ -129,40 +110,41 @@ public class Encoder extends XmiWriterCasConsumer {
 	 * feature representation cutoffs and representations.
 	 * @throws ResourceInitializationException 
 	 */
-	public void initialize() throws ResourceInitializationException {
-		super.initialize();
-		
-		// Directory to output our encoded feature files
-		mOutputDir = new File((String) getConfigParameterValue(PARAM_OUTPUTDIR));
-		encodingChoice = (Integer) getConfigParameterValue(PARAM_ENCODING_CHOICE);
-		labelsAreNominal = (Boolean) getConfigParameterValue(PARAM_LABELSARENOMINAL);
-		termCountCutoff = (Integer) getConfigParameterValue(PARAM_TERMCOUNTCUTOFF);
-		documentCountCutoff = (Integer) getConfigParameterValue(PARAM_DOCUMENTCOUNTCUTOFF);
-		trainingSetFile = (String) getConfigParameterValue(PARAM_TRAINING_FILE);
-		
-		// Initialize feature stats datastructures
-		stats.put(ENTITIES, new FeatureStats());
-		stats.put(WORDS, new FeatureStats());
-		stats.put(CANONICALWORDS, new FeatureStats());
-		stats.put(REGEX, new FeatureStats());
-		stats.put(LABELS, new FeatureStats());
-		
-		// Initialize Regex pattern to Feature name mappings
-		patternToFeatureMapping.put(DateAnnotation.type,     "Date");
-		patternToFeatureMapping.put(TimeAnnotation.type,     "Time");
-		patternToFeatureMapping.put(NumToken.type,           "Number");
-		patternToFeatureMapping.put(FractionAnnotation.type, "Fraction");
-		//TODO: Add other regex annotations from config
-		
-		logger.info("Initialized FeatureEncoder");
-		logger.debug("keys in stats: ".concat(stats.keySet().toString()));
+	@Override
+    public void initialize() throws ResourceInitializationException {
+	    super.initialize();
+    	
+	    // Directory to output our encoded feature files
+    	mOutputDir = new File((String) getConfigParameterValue(PARAM_OUTPUTDIR));
+  		encodingChoice = (Integer) getConfigParameterValue(PARAM_ENCODING_CHOICE);
+  		labelsAreNominal = (Boolean) getConfigParameterValue(PARAM_LABELSARENOMINAL);
+  		termCountCutoff = (Integer) getConfigParameterValue(PARAM_TERMCOUNTCUTOFF);
+  		documentCountCutoff = (Integer) getConfigParameterValue(PARAM_DOCUMENTCOUNTCUTOFF);
+  		trainingSetFile = (String) getConfigParameterValue(PARAM_TRAINING_FILE);
+  		
+  		// Initialize feature stats datastructures
+  		stats.put(ENTITIES, new FeatureStats());
+  		stats.put(WORDS, new FeatureStats());
+  		stats.put(CANONICALWORDS, new FeatureStats());
+  		stats.put(REGEX, new FeatureStats());
+  		stats.put(LABELS, new FeatureStats());
+  		
+  		// Initialize Regex pattern to Feature name mappings
+  		patternToFeatureMapping.put(DateAnnotation.type,     "Date");
+  		patternToFeatureMapping.put(TimeAnnotation.type,     "Time");
+  		patternToFeatureMapping.put(NumToken.type,           "Number");
+  		patternToFeatureMapping.put(FractionAnnotation.type, "Fraction");
+  		//TODO: Add other regex annotations from config
+  		
+  		logger.info("Initialized FeatureEncoder");
+  		logger.debug("keys in stats: ".concat(stats.keySet().toString()));
 	}
 	
 	/**
 	 * Process a CAS for a single document.
-	 * We add feature information to the global datastructures
+	 * We add feature information to the global data structures
 	 * and process them finally in 
-	 * {@link #collectionProcessComplete() collectionProcessComplete()}.
+	 * {@link #collectionProcessComplete(ProcessTrace)}.
 	 */
 	@Override
 	public void processCas(CAS aCAS) throws ResourceProcessException {
@@ -364,7 +346,7 @@ public class Encoder extends XmiWriterCasConsumer {
     			if (labelClasses.containsKey(labelName))
     				labelClasses.get(labelName).add(labelValue.trim());
     			else {
-    				Set<String> classValues = new HashSet<>();
+    				Set<String> classValues = new HashSet<String>();
     				classValues.add(labelValue.trim());
     				labelClasses.put(labelName, classValues);
     			}
@@ -377,11 +359,10 @@ public class Encoder extends XmiWriterCasConsumer {
 	 * such as TF, TF*IDF, etc.
 	 * 
 	 * @param encodingMethod Binary, TF, TFIDF, COUNT, LOG(TF+1)
-	 * @param currentValue Currently encoded value for this term
 	 * @param numTerms
 	 * @param numTermsInDocument
 	 * @param documentFrequency
-	 * @return
+	 * @return encoded Value
 	 */
 	public static double encode(int encodingMethod,
 			int numTerms, int numTermsInDocument, double documentFrequency) {
@@ -420,8 +401,9 @@ public class Encoder extends XmiWriterCasConsumer {
 	 * Given a label annotation, get its value.
 	 * This getter takes care of null values, and uses the special class
 	 * NULL to return appropriately
-	 * @param label
-	 * @return
+	 * @param label the label whose value is to be fetched
+	 * @param messageLogger the logging manager for error messages
+	 * @return label Value
 	 */
 	public static String getLabelValue(ClassLabel label, Logger messageLogger) {
 		String retVal = label.getLabelValue();

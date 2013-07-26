@@ -1,34 +1,21 @@
 package org.dbmi.featureselection;
+import org.apache.log4j.BasicConfigurator;
+import org.apache.log4j.Logger;
+
+import weka.core.Instance;
+import weka.core.Instances;
+import weka.filters.Filter;
+import weka.filters.unsupervised.attribute.Remove;
+
 import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.math.RoundingMode;
 import java.text.DecimalFormat;
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.StringTokenizer;
-import java.util.TreeMap;
-
-import org.apache.log4j.BasicConfigurator;
-import org.apache.log4j.Logger;
-
-import weka.attributeSelection.CfsSubsetEval;
-import weka.classifiers.Classifier;
-import weka.classifiers.meta.AttributeSelectedClassifier;
-import weka.core.Attribute;
-import weka.core.Instance;
-import weka.core.Instances;
-import weka.core.converters.ArffSaver;
-import weka.filters.Filter;
-import weka.filters.supervised.attribute.AttributeSelection;
-import weka.filters.unsupervised.attribute.Remove;
-import weka.filters.unsupervised.instance.RemoveRange;
-import weka.filters.unsupervised.instance.SparseToNonSparse;
 
 
 public class Evaluator {
@@ -161,7 +148,7 @@ public class Evaluator {
 	 * Given a standard deviation measure, convert it into a 95% confidence interval value.
 	 * Make sure that m is set correctly, and is in the range 100 <= m <= 5000.
 	 * @param input Standard deviation in the value being measured.
-	 * @return
+	 * @return 95% CI value.
 	 */
 	private double convertStdevToCI(double input) {
 		// (Reasonably) accurate t table values for range 100 - 5000 (95% test, two tailed)
@@ -333,37 +320,38 @@ public class Evaluator {
 		return newInst;
 	}
 	
-	private static double[][] readPredictions(String fileName, int K, Instances testSet, double[][] predictions1) throws NumberFormatException, IOException {
-			BufferedReader br = new BufferedReader( new FileReader(fileName));
-			String strLine = null;
-			StringTokenizer st = null;
-			int lineNumber = 0, tokenNumber = 0;
-			int m = testSet.numInstances();
-			double[][] pred = new double[m][K];
+  @SuppressWarnings("unused") // to be used for debugging
+  private static double[][] readPredictions(String fileName, int K, Instances testSet, double[][] predictions1) throws NumberFormatException, IOException {
+		BufferedReader br = new BufferedReader( new FileReader(fileName));
+		String strLine = null;
+		StringTokenizer st = null;
+		int lineNumber = 0, tokenNumber = 0;
+		int m = testSet.numInstances();
+		double[][] pred = new double[m][K];
 			
-			while( (strLine = br.readLine()) != null)
+		while( (strLine = br.readLine()) != null)
+		{
+			//break comma separated line using ","
+			st = new StringTokenizer(strLine, ",");
+			while(st.hasMoreTokens())
 			{
-				//break comma separated line using ","
-				st = new StringTokenizer(strLine, ",");
-				while(st.hasMoreTokens())
-				{
-					
-					pred[lineNumber][tokenNumber] = 1.0 - Double.parseDouble(st.nextToken()); // <-- if a prediction of 1 means positive, and positive's index is 0 in the list of class values {positive, negative} in the dataset
-					
-					/*
-					double Y = testSet.attribute(labelIndices.get(labelNamesInOrder.get(tokenNumber))).indexOfValue("Y");
-					if (1.0 == Double.parseDouble(st.nextToken()))
-						pred[lineNumber][tokenNumber] = Y;
-					else
-						pred[lineNumber][tokenNumber] = predictions1[lineNumber][tokenNumber];;
-						*/
-					tokenNumber++;
-				}
- 
-				//reset 
-				lineNumber++;
-				tokenNumber = 0;
+				pred[lineNumber][tokenNumber] = 1.0 - Double.parseDouble(st.nextToken()); // <-- if a prediction of 1 means positive, and positive's index is 0 in the list of class values {positive, negative} in the dataset
+				
+				/*
+				double Y = testSet.attribute(labelIndices.get(labelNamesInOrder.get(tokenNumber))).indexOfValue("Y");
+				if (1.0 == Double.parseDouble(st.nextToken()))
+					pred[lineNumber][tokenNumber] = Y;
+				else
+					pred[lineNumber][tokenNumber] = predictions1[lineNumber][tokenNumber];;
+					*/
+				tokenNumber++;
 			}
+ 
+			//reset 
+			lineNumber++;
+			tokenNumber = 0;
+		}
+		br.close();
 		return pred;
 	}
 

@@ -24,6 +24,7 @@ import org.apache.uima.examples.SourceDocumentInformation;
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.resource.ResourceInitializationException;
 import org.apache.uima.util.Progress;
+import org.apache.uima.util.ProgressImpl;
 import org.dbmi.uima.tools.components.idash.type.ClassLabel;
 
 public class XMLCorpusReader extends CollectionReader_ImplBase {
@@ -151,7 +152,7 @@ public class XMLCorpusReader extends CollectionReader_ImplBase {
 	}
 	
 	private void addSourceDocumentInformation(JCas aJCas, 
-			String documentName, int length) throws MalformedURLException {
+			String documentName, int length) {
 		SourceDocumentInformation srcDocInfo = new SourceDocumentInformation(aJCas);
 		
 		//TODO: Clean this up
@@ -162,7 +163,7 @@ public class XMLCorpusReader extends CollectionReader_ImplBase {
 	    srcDocInfo.addToIndexes();
 	}
 	
-	private void addClassLabels(JCas aJCas, String documentId) throws IOException {
+	private void addClassLabels(JCas aJCas, String documentId) {
 		
 		// For each label
 		for(String labelName : mDocumentLabels.keySet()) {
@@ -181,8 +182,9 @@ public class XMLCorpusReader extends CollectionReader_ImplBase {
 	
 	@Override
 	public Progress[] getProgress() {
-		// TODO Auto-generated method stub
-		return null;
+		return new Progress[] {
+		  new ProgressImpl(numDocumentsRead, 0, "Documents (total unknown)")
+		};
 	}
 
 	@Override
@@ -207,7 +209,8 @@ public class XMLCorpusReader extends CollectionReader_ImplBase {
 	 * in the file. In terms of the i2b2 dataset, please use the separate intuitive / textual labels and provide
 	 * ONE of either of them to this program.
 	 */
-	private void readI2b2styleLabelFile() throws FileNotFoundException, XMLStreamException, FactoryConfigurationError {
+  @SuppressWarnings("unused")
+  private void readI2b2styleLabelFile() throws FileNotFoundException, XMLStreamException, FactoryConfigurationError {
 		String labelFilePath = ((String) getConfigParameterValue(PARAM_LABEL_PATH)).trim();
 		XMLStreamReader xmlStreamReader = XMLInputFactory.newInstance().createXMLStreamReader(
 				new FileInputStream(labelFilePath));

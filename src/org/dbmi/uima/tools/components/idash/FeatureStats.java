@@ -5,12 +5,11 @@ import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.Set;
-import java.util.Map.Entry;
 
 /**
  * Calculates statistics about a feature group (e.g. words)
  * which become useful when we need to do feature selection / reduction.
- * Everytime a feature is encountered in a document, the method 
+ * Every time a feature is encountered in a document, the method 
  * {@link FeatureStats#process(String, Integer) process} is called to update counts.
  * In the end, {@link #removeRareTerms(int, int) removeRareTerms} gets rid of rare terms
  * 
@@ -84,7 +83,7 @@ public class FeatureStats {
 	 * Get the document frequency of a given term. Useful
 	 * for calculating TF*IDF representation of features
 	 * @param term
-	 * @return
+	 * @return document frequency.
 	 */
 	public double getDocumentFrequency(String term) {
 		if(termDocumentCounts.containsKey(term))

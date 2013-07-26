@@ -35,5 +35,6 @@
 	<classpathentry kind="lib" path="UIMA_HOME_LIB/uima-examples.jar"/>
 	<classpathentry kind="lib" path="ROOT/lib/liblinear-1.92.jar"/>
 	<classpathentry kind="lib" path="ROOT/lib/LibLINEAR.jar"/>
+        <classpathentry kind="lib" path="ROOT/lib/cTAKES.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

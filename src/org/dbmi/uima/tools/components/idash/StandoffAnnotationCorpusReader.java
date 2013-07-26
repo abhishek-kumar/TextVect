@@ -82,7 +82,8 @@ public class StandoffAnnotationCorpusReader extends CollectionReader_ImplBase {
 	    for (File f : docsDirectory.listFiles()) {
 	    	if (f.isDirectory()) {
 	    		File[] dataFiles = f.listFiles(new FilenameFilter() {
-	    		    public boolean accept(File dir, String name) {
+	    		    @Override
+              public boolean accept(File dir, String name) {
 	    		        return name.toLowerCase().endsWith("report.txt");
 	    		    }
 	    		});
@@ -118,10 +119,11 @@ public class StandoffAnnotationCorpusReader extends CollectionReader_ImplBase {
 	    }
 	    
 	    // open input stream to file
-	    File file = (File) mDataFiles.get(mCurrentIndex);
+	    File file = mDataFiles.get(mCurrentIndex);
 	    String text = FileUtils.file2String(file, mEncoding);
 	    String cleanText = INVALID_XML_CHARS.matcher(text).replaceAll("");
-	      // put document in CAS
+	    
+	    // put document in CAS
 	    jcas.setDocumentText(cleanText);
 
 	    // set language if it was explicitly specified as a configuration parameter
@@ -140,7 +142,8 @@ public class StandoffAnnotationCorpusReader extends CollectionReader_ImplBase {
 	    
 	}
 	
-	private void addSourceDocumentInformation(JCas aJCas, File file) throws MalformedURLException {
+  @SuppressWarnings("deprecation")
+  private void addSourceDocumentInformation(JCas aJCas, File file) throws MalformedURLException {
 		SourceDocumentInformation srcDocInfo = new SourceDocumentInformation(aJCas);
 	    srcDocInfo.setUri(file.getAbsoluteFile().toURL().toString());
 	    srcDocInfo.setOffsetInSource(0);
@@ -152,7 +155,7 @@ public class StandoffAnnotationCorpusReader extends CollectionReader_ImplBase {
 	private void addClassLabels(JCas aJCas) throws IOException {
 		if(mLabelFiles.size() == 0)
 			return;
-		File file = (File) mLabelFiles.get(mCurrentIndex);
+		File file = mLabelFiles.get(mCurrentIndex);
 	    String text = FileUtils.file2String(file, mEncoding);
 	    for(String line : text.split("\\n")) {
 	    	if (line.startsWith("#"))
@@ -175,13 +178,31 @@ public class StandoffAnnotationCorpusReader extends CollectionReader_ImplBase {
 	
 	@Override
 	public Progress[] getProgress() {
-		// TODO Auto-generated method stub
-		return null;
+	  return new Progress[]{
+	    new Progress() {
+        
+        @Override
+        public boolean isApproximate() {
+          return false;
+        }
+        
+        @Override
+        public String getUnit() {
+          return "Documents";
+        }
+        
+        @Override
+        public long getTotal() {
+          return mDataFiles.size();
+        }
+        
+        @Override
+        public long getCompleted() {
+          return mCurrentIndex;
+        }
+      }};
 	}
 
 	@Override
-	public void close() throws IOException {
-		// TODO Auto-generated method stub
-
-	}
+	public void close() throws IOException { }
 }

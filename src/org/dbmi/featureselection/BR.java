@@ -72,8 +72,7 @@ public class BR  {
 	/**
 	 * Use cross validation to tune regularization parameter and return this tuned value.
 	 * @param dataset training set
-	 * @param filter filter that removes other labels not being trained currently
-	 * @return
+	 * @return Best regularization weight.
 	 * @throws Exception 
 	 */
 	private double gridSearchC(Instances dataset) throws Exception {

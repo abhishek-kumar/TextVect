@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<taeDescription xmlns="http://uima.watson.ibm.com/resourceSpecifier">
+  <frameworkImplementation>org.apache.uima.java</frameworkImplementation>
+  <primitive>true</primitive>
+  <annotatorImplementationName>edu.mayo.bmi.smoking.ae.SentenceAdjuster</annotatorImplementationName>
+  <analysisEngineMetaData>
+    <name>Sentence Adjuster</name>
+    <description>This annotator expands sentence annotations of type "Tobacco: none" to allow the correct negation  recognition of the relevant NEs.</description>
+    <version>1.0</version>
+    <vendor>Mayo Clinic</vendor>
+    <configurationParameters>
+      <configurationParameter>
+        <name>UseSegments</name>
+        <description>Flag whether to use segments or full doc text.</description>
+        <type>Boolean</type>
+        <multiValued>false</multiValued>
+        <mandatory>false</mandatory>
+      </configurationParameter>
+      <configurationParameter>
+        <name>SegmentsToSkip</name>
+        <description>Segments to skip.</description>
+        <type>String</type>
+        <multiValued>true</multiValued>
+        <mandatory>false</mandatory>
+      </configurationParameter>
+      <configurationParameter>
+        <name>WordsToIgnore</name>
+        <description>Set of words that PostModifier should ignore (act as if the word was not there) when looking for a pattern match.</description>
+        <type>String</type>
+        <multiValued>true</multiValued>
+        <mandatory>false</mandatory>
+      </configurationParameter>
+      <configurationParameter>
+        <name>WordsInPattern</name>
+        <type>String</type>
+        <multiValued>true</multiValued>
+        <mandatory>true</mandatory>
+      </configurationParameter>
+    </configurationParameters>
+    <configurationParameterSettings>
+      <nameValuePair>
+        <name>UseSegments</name>
+        <value>
+          <boolean>false</boolean>
+        </value>
+      </nameValuePair>
+      <nameValuePair>
+        <name>SegmentsToSkip</name>
+        <value>
+          <array>
+            <string/>
+          </array>
+        </value>
+      </nameValuePair>
+      <nameValuePair>
+        <name>WordsToIgnore</name>
+        <value>
+          <array/>
+        </value>
+      </nameValuePair>
+      <nameValuePair>
+        <name>WordsInPattern</name>
+        <value>
+          <array>
+            <string>no</string>
+            <string>none</string>
+            <string>never</string>
+            <string>quit</string>
+            <string>smoked</string>
+            <string>:</string>
+          </array>
+        </value>
+      </nameValuePair>
+    </configurationParameterSettings>
+    <typeSystemDescription/>
+    <typePriorities/>
+    <fsIndexCollection/>
+    <capabilities>
+      <capability>
+        <inputs/>
+        <outputs/>
+        <languagesSupported/>
+      </capability>
+    </capabilities>
+    <operationalProperties>
+      <modifiesCas>true</modifiesCas>
+      <multipleDeploymentAllowed>true</multipleDeploymentAllowed>
+    </operationalProperties>
+  </analysisEngineMetaData>
+  <resourceManagerConfiguration/>
+</taeDescription>

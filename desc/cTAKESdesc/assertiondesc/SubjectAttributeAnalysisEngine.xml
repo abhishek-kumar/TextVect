@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<analysisEngineDescription xmlns="http://uima.apache.org/resourceSpecifier">
+  <frameworkImplementation>org.apache.uima.java</frameworkImplementation>
+  <primitive>true</primitive>
+  <annotatorImplementationName>edu.mayo.bmi.uima.attributes.SubjectAttributeAnalysisEngine</annotatorImplementationName>
+  <analysisEngineMetaData>
+    <name>SubjectAttributeAnalysisEngine</name>
+    <description>Assigns the subject of each IdentifiedAnnotation in the text.   Requires dependency parses and semantic role labels upstream.  It is also preferable to find the generic attribute before finding subject.</description>
+    <version>1.0</version>
+    <vendor/>
+    <configurationParameters/>
+    <configurationParameterSettings/>
+    <typeSystemDescription>
+      <imports>
+        <import location="../common-type-system/desc/common_type_system.xml"/>
+      </imports>
+    </typeSystemDescription>
+    <typePriorities/>
+    <fsIndexCollection/>
+    <capabilities>
+      <capability>
+        <inputs>
+          <type allAnnotatorFeatures="true">edu.mayo.bmi.uima.core.type.textsem.EntityMention</type>
+          <type allAnnotatorFeatures="true">edu.mayo.bmi.uima.core.type.syntax.BaseToken</type>
+        </inputs>
+        <outputs>
+          <type allAnnotatorFeatures="true">edu.mayo.bmi.uima.core.type.textsem.EntityMention</type>
+        </outputs>
+        <languagesSupported/>
+      </capability>
+    </capabilities>
+    <operationalProperties>
+      <modifiesCas>true</modifiesCas>
+      <multipleDeploymentAllowed>true</multipleDeploymentAllowed>
+      <outputsNewCASes>false</outputsNewCASes>
+    </operationalProperties>
+  </analysisEngineMetaData>
+  <resourceManagerConfiguration/>
+</analysisEngineDescription>

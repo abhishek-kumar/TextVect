@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<taeDescription xmlns="http://uima.apache.org/resourceSpecifier">
+  <frameworkImplementation>org.apache.uima.java</frameworkImplementation>
+  <primitive>false</primitive>
+  <delegateAnalysisEngineSpecifiers>
+    <delegateAnalysisEngine key="TokenizerAnnotator">
+      <import location="../../coredesc/analysis_engine/TokenizerAnnotator.xml"/>
+    </delegateAnalysisEngine>
+    <delegateAnalysisEngine key="CdaCasInitializer">
+      <import location="../../docpredesc/cas_initializer/CdaCasInitializer.xml"/>
+    </delegateAnalysisEngine>
+    <delegateAnalysisEngine key="SentenceDetectorAnnotator">
+      <import location="../../coredesc/analysis_engine/SentenceDetectorAnnotator.xml"/>
+    </delegateAnalysisEngine>
+    <delegateAnalysisEngine key="LvgAnnotator">
+      <import location="../../lvgdesc/analysis_engine/LvgAnnotator.xml"/>
+    </delegateAnalysisEngine>
+  </delegateAnalysisEngineSpecifiers>
+  <analysisEngineMetaData>
+    <name>CDABaseAggregateTAE</name>
+    <description/>
+    <version/>
+    <vendor/>
+    <configurationParameters searchStrategy="language_fallback"/>
+    <configurationParameterSettings/>
+    <flowConstraints>
+      <fixedFlow>
+        <node>CdaCasInitializer</node>
+        <node>SentenceDetectorAnnotator</node>
+        <node>TokenizerAnnotator</node>
+        <node>LvgAnnotator</node>
+      </fixedFlow>
+    </flowConstraints>
+    <typePriorities/>
+    <fsIndexCollection/>
+    <capabilities>
+      <capability>
+        <inputs/>
+        <outputs/>
+        <outputSofas>
+          <sofaName>plaintext</sofaName>
+        </outputSofas>
+        <languagesSupported/>
+      </capability>
+    </capabilities>
+    <operationalProperties>
+      <modifiesCas>true</modifiesCas>
+      <multipleDeploymentAllowed>true</multipleDeploymentAllowed>
+      <outputsNewCASes>false</outputsNewCASes>
+    </operationalProperties>
+  </analysisEngineMetaData>
+  <resourceManagerConfiguration/>
+  <sofaMappings>
+    <sofaMapping>
+      <componentKey>LvgAnnotator</componentKey>
+      <aggregateSofaName>plaintext</aggregateSofaName>
+    </sofaMapping>
+    <sofaMapping>
+      <componentKey>TokenizerAnnotator</componentKey>
+      <aggregateSofaName>plaintext</aggregateSofaName>
+    </sofaMapping>
+    <sofaMapping>
+      <componentKey>CdaCasInitializer</componentKey>
+      <componentSofaName>plaintext</componentSofaName>
+      <aggregateSofaName>plaintext</aggregateSofaName>
+    </sofaMapping>
+    <sofaMapping>
+      <componentKey>SentenceDetectorAnnotator</componentKey>
+      <aggregateSofaName>plaintext</aggregateSofaName>
+    </sofaMapping>
+  </sofaMappings>
+</taeDescription>

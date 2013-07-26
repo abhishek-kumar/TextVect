@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<taeDescription xmlns="http://uima.apache.org/resourceSpecifier">
+  <frameworkImplementation>org.apache.uima.java</frameworkImplementation>
+  <primitive>true</primitive>
+  <annotatorImplementationName>edu.mayo.bmi.uima.sideeffect.ae.PSESentenceAnnotator</annotatorImplementationName>
+  <analysisEngineMetaData>
+    <name>PSESentenceAnnotator</name>
+    <description>Annotate spans of the sentence(s) that contains signs/symptoms or disease and drugs. But disregard the particular section(s).</description>
+    <version>1.0</version>
+    <vendor/>
+    <configurationParameters>
+      <configurationParameter>
+        <name>SectionsToIgnore</name>
+        <type>String</type>
+        <multiValued>true</multiValued>
+        <mandatory>false</mandatory>
+      </configurationParameter>
+    </configurationParameters>
+    <configurationParameterSettings>
+      <nameValuePair>
+        <name>SectionsToIgnore</name>
+        <value>
+          <array>
+            <string>20105</string>
+          </array>
+        </value>
+      </nameValuePair>
+    </configurationParameterSettings>
+    <typeSystemDescription/>
+    <capabilities>
+      <capability>
+        <inputs/>
+        <outputs/>
+        <languagesSupported/>
+      </capability>
+    </capabilities>
+    <operationalProperties>
+      <modifiesCas>true</modifiesCas>
+      <multipleDeploymentAllowed>true</multipleDeploymentAllowed>
+    </operationalProperties>
+  </analysisEngineMetaData>
+</taeDescription>

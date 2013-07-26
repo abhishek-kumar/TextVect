@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<taeDescription xmlns="http://uima.apache.org/resourceSpecifier">
+<frameworkImplementation>org.apache.uima.java</frameworkImplementation>
+<primitive>true</primitive>
+<annotatorImplementationName>edu.mayo.bmi.uima.core.ae.TokenizerAnnotator</annotatorImplementationName>
+<analysisEngineMetaData>
+<name>TokenizerAnnotator</name>
+<description>Tokenizer used for the first release of cTAKES.  This tokenizer was replaced by one that follows PTB rules as the default for verson 2 of cTAKES.</description>
+<version>2.2</version>
+<vendor>Mayo Clinic</vendor>
+<configurationParameters>
+<configurationParameter>
+<name>SegmentsToSkip</name>
+<description>Segments to skip.</description>
+<type>String</type>
+<multiValued>true</multiValued>
+<mandatory>false</mandatory>
+</configurationParameter>
+<configurationParameter>
+<name>FreqCutoff</name>
+<description>Frequency cutoff for hyphen entries.</description>
+<type>Integer</type>
+<multiValued>false</multiValued>
+<mandatory>true</mandatory>
+</configurationParameter>
+</configurationParameters>
+<configurationParameterSettings>
+<nameValuePair>
+<name>SegmentsToSkip</name>
+<value>
+<array/>
+</value>
+</nameValuePair>
+<nameValuePair>
+<name>FreqCutoff</name>
+<value>
+<integer>0</integer>
+</value>
+</nameValuePair>
+</configurationParameterSettings>
+<typeSystemDescription>
+<imports>
+<import location="../../common-type-system/desc/common_type_system.xml"/>
+</imports>
+</typeSystemDescription>
+<typePriorities/>
+<fsIndexCollection/>
+<capabilities>
+<capability>
+<inputs>
+<type allAnnotatorFeatures="true">edu.mayo.bmi.uima.core.type.textspan.Segment</type>
+</inputs>
+<outputs>
+<type allAnnotatorFeatures="true">edu.mayo.bmi.uima.core.type.syntax.BaseToken</type>
+</outputs>
+<languagesSupported/>
+</capability>
+</capabilities>
+<operationalProperties>
+<modifiesCas>true</modifiesCas>
+<multipleDeploymentAllowed>true</multipleDeploymentAllowed>
+<outputsNewCASes>false</outputsNewCASes>
+</operationalProperties>
+</analysisEngineMetaData>
+<externalResourceDependencies>
+<externalResourceDependency>
+<key>HyphFreqTable</key>
+<description></description>
+<interfaceName>edu.mayo.bmi.uima.core.resource.StringIntegerMapResource</interfaceName>
+<optional>true</optional>
+</externalResourceDependency>
+</externalResourceDependencies>
+<resourceManagerConfiguration>
+<externalResources>
+<externalResource>
+<name>HyphFreqFile</name>
+<description></description>
+<fileResourceSpecifier>
+<fileUrl>file:coreresources/tokenizer/hyphenated.txt</fileUrl>
+</fileResourceSpecifier>
+<implementationName>edu.mayo.bmi.uima.core.resource.StringIntegerMapResourceImpl</implementationName>
+</externalResource>
+</externalResources>
+<externalResourceBindings>
+<externalResourceBinding>
+<key>HyphFreqTable</key>
+<resourceName>HyphFreqFile</resourceName>
+</externalResourceBinding>
+</externalResourceBindings>
+</resourceManagerConfiguration>
+</taeDescription>

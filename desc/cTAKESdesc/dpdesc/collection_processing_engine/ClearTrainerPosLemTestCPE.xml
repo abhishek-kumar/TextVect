@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cpeDescription xmlns="http://uima.apache.org/resourceSpecifier">
+    <collectionReader>
+        <collectionIterator>
+            <descriptor>
+                <import location="../collection_reader/DependencyFileCollectionReader.xml"/>
+            </descriptor>
+            <configurationParameterSettings>
+                <nameValuePair>
+                    <name>DependencyFile</name>
+                    <value>
+                        <string>data/sample.min</string>
+                    </value>
+                </nameValuePair>
+                <nameValuePair>
+                    <name>InputFormat</name>
+                    <value>
+                        <string>MIN</string>
+                    </value>
+                </nameValuePair>
+                <nameValuePair>
+                    <name>TrainingMode</name>
+                    <value>
+                        <boolean>true</boolean>
+                    </value>
+                </nameValuePair>
+            </configurationParameterSettings>
+        </collectionIterator>
+    </collectionReader>
+    <casProcessors casPoolSize="3" processingUnitThreadCount="1">
+        <casProcessor deployment="integrated" name="ClearTrainerPosLemAggregate">
+            <descriptor>
+                <import location="../analysis_engine/ClearTrainerPosLemAggregate.xml"/>
+            </descriptor>
+            <deploymentParameters/>
+            <errorHandling>
+                <errorRateThreshold action="terminate" value="0/1000"/>
+                <maxConsecutiveRestarts action="terminate" value="30"/>
+                <timeout max="100000" default="-1"/>
+            </errorHandling>
+            <checkpoint batch="10000" time="1000ms"/>
+            <configurationParameterSettings>
+                <nameValuePair>
+                    <name>DependencyModelFile</name>
+                    <value>
+                        <string>sample.mod</string>
+                    </value>
+                </nameValuePair>
+                <nameValuePair>
+                    <name>LexiconDirectory</name>
+                    <value>
+                        <string>resources/lexiconSample</string>
+                    </value>
+                </nameValuePair>
+                <nameValuePair>
+                    <name>PosModelFile</name>
+                    <value>
+                        <string>posresources/models/mayo-pos.zip</string>
+                    </value>
+                </nameValuePair>
+                <nameValuePair>
+                    <name>TagDictionary</name>
+                    <value>
+                        <string>posresources/models/tag.dictionary.txt</string>
+                    </value>
+                </nameValuePair>
+            </configurationParameterSettings>
+        </casProcessor>
+    </casProcessors>
+    <cpeConfig>
+        <numToProcess>-1</numToProcess>
+        <deployAs>immediate</deployAs>
+        <checkpoint batch="0" time="300000ms"/>
+        <timerImpl/>
+    </cpeConfig>
+</cpeDescription>

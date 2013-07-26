@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<taeDescription xmlns="http://uima.apache.org/resourceSpecifier">
+  <frameworkImplementation>org.apache.uima.java</frameworkImplementation>
+  <primitive>true</primitive>
+  <annotatorImplementationName>edu.mayo.bmi.uima.core.ae.CopyAnnotator</annotatorImplementationName>
+  <analysisEngineMetaData>
+    <name>AdjP to LookupWindow</name>
+    <description>Copies Shallow Parse AdjP annotations to be used as lookup windows for dictionary lookup.</description>
+    <version/>
+    <vendor>Mayo</vendor>
+    <configurationParameters>
+      <configurationParameter>
+        <name>srcObjClass</name>
+        <description>Source JCas object class.  This must be an object that already exists in the JCas.</description>
+        <type>String</type>
+        <multiValued>false</multiValued>
+        <mandatory>true</mandatory>
+      </configurationParameter>
+      <configurationParameter>
+        <name>destObjClass</name>
+        <description>Destination JCas object class.  A new JCas object will be created.</description>
+        <type>String</type>
+        <multiValued>false</multiValued>
+        <mandatory>true</mandatory>
+      </configurationParameter>
+      <configurationParameter>
+        <name>dataBindMap</name>
+        <description>Binds data from source to destination.  Format for each entry is the getter method name of the source to the setter method name of the destination.  e.g. getMyValue|setMyValue</description>
+        <type>String</type>
+        <multiValued>true</multiValued>
+        <mandatory>true</mandatory>
+      </configurationParameter>
+    </configurationParameters>
+    <configurationParameterSettings>
+      <nameValuePair>
+        <name>srcObjClass</name>
+        <value>
+          <string>edu.mayo.bmi.uima.core.type.syntax.ADJP</string>
+        </value>
+      </nameValuePair>
+      <nameValuePair>
+        <name>destObjClass</name>
+        <value>
+          <string>edu.mayo.bmi.uima.core.type.textspan.LookupWindowAnnotation</string>
+        </value>
+      </nameValuePair>
+      <nameValuePair>
+        <name>dataBindMap</name>
+        <value>
+          <array>
+            <string>getBegin|setBegin</string>
+            <string>getEnd|setEnd</string>
+          </array>
+        </value>
+      </nameValuePair>
+    </configurationParameterSettings>
+    <typeSystemDescription>
+      <imports>
+      </imports>
+      <types>
+        <typeDescription>
+          <name>edu.mayo.bmi.uima.core.type.CopySrcAnnotation</name>
+          <description>Used for testing CopyAnnotator.</description>
+          <supertypeName>uima.tcas.Annotation</supertypeName>
+        </typeDescription>
+        <typeDescription>
+          <name>edu.mayo.bmi.uima.core.type.CopyDestAnnotation</name>
+          <description>Used for testing CopyAnnotator.</description>
+          <supertypeName>uima.tcas.Annotation</supertypeName>
+        </typeDescription>
+      </types>
+    </typeSystemDescription>
+    <typePriorities/>
+    <fsIndexCollection/>
+    <capabilities>
+      <capability>
+        <inputs>
+          <type allAnnotatorFeatures="true">edu.mayo.bmi.uima.core.type.syntax.ADJP</type>
+        </inputs>
+        <outputs>
+          <type allAnnotatorFeatures="true">edu.mayo.bmi.uima.core.type.textspan.LookupWindowAnnotation</type>
+        </outputs>
+        <languagesSupported/>
+      </capability>
+    </capabilities>
+    <operationalProperties>
+      <modifiesCas>true</modifiesCas>
+      <multipleDeploymentAllowed>true</multipleDeploymentAllowed>
+      <outputsNewCASes>false</outputsNewCASes>
+    </operationalProperties>
+  </analysisEngineMetaData>
+  <resourceManagerConfiguration/>
+</taeDescription>

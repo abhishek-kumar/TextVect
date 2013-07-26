@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<typeSystemDescription xmlns="http://uima.apache.org/resourceSpecifier">
+  <name>CoreferenceRelation</name>
+  <description/>
+  <version>1.0</version>
+  <vendor/>
+  <imports>
+    <import location="BinaryRelation.xml"/>
+  </imports>
+  <types>
+    <typeDescription>
+      <name>org.mipacq.annotation.type.CoreferenceRelation</name>
+      <description/>
+      <supertypeName>org.mipacq.annotation.type.BinaryRelation</supertypeName>
+      <features>
+        <featureDescription>
+          <name>coref_prob</name>
+          <description/>
+          <rangeTypeName>uima.cas.Double</rangeTypeName>
+        </featureDescription>
+      </features>
+    </typeDescription>
+    <typeDescription>
+      <name>org.mipacq.annotation.type.NonCoreferenceRelation</name>
+      <description>Hypothesized but negative example of coreference.  Used for debugging coreference model.</description>
+      <supertypeName>org.mipacq.annotation.type.BinaryRelation</supertypeName>
+      <features>
+        <featureDescription>
+          <name>coref_prob</name>
+          <description/>
+          <rangeTypeName>uima.cas.Double</rangeTypeName>
+        </featureDescription>
+      </features>
+    </typeDescription>
+  </types>
+</typeSystemDescription>

@@ -58,13 +58,24 @@ if [ ! -d "$ROOT/lib" ]; then
   rm -rf TextVect-lib
 fi
 
+# Sample data files
+if [ ! -d "$ROOT/data" ]; then
+  echo -e "\e[1;33mDownloading sample datasets (please request permission before using them)\e[0m"
+  wget https://dl.dropboxusercontent.com/u/3091691/TextVect-lib/data.zip
+  mkdir data
+  unzip data.zip -d data
+  rm data.zip
+fi
+
 # Update ".classpath" to point to correct directories
 cp claspath-template.txt .classpath
-
 sed -i "s#UIMA_HOME_LIB#$UIMA_HOME/lib#g" .classpath
 sed -i "s#UIMA_HOME#$UIMA_HOME#g" .classpath
 sed -i "s#ROOT#$ROOT#g" .classpath
 
+export UIMA_HOME
+export ROOT
+export JAVA
+
 echo -e "\e[1;32mInstall check successful!\e[0m"
-exit 0
 

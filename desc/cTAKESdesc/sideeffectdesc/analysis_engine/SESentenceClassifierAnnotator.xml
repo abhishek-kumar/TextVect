@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<taeDescription xmlns="http://uima.apache.org/resourceSpecifier">
+  <frameworkImplementation>org.apache.uima.java</frameworkImplementation>
+  <primitive>true</primitive>
+  <annotatorImplementationName>edu.mayo.bmi.uima.sideeffect.ae.SESentenceClassifierAnnotator</annotatorImplementationName>
+  <analysisEngineMetaData>
+    <name>SESentenceClassifierAnnotator</name>
+    <description>identify sentences containing side effect and causative drugs using both rules and libSVM</description>
+    <version/>
+    <vendor/>
+    <configurationParameters>
+      <configurationParameter>
+        <name>PathOfModel</name>
+        <type>String</type>
+        <multiValued>false</multiValued>
+        <mandatory>true</mandatory>
+      </configurationParameter>
+    </configurationParameters>
+    <configurationParameterSettings>
+      <nameValuePair>
+        <name>PathOfModel</name>
+        <value>
+          <string>resources/sideeffect/classifier/libsvm_model_onWholeSet</string>
+        </value>
+      </nameValuePair>
+    </configurationParameterSettings>
+    <typeSystemDescription/>
+    <capabilities>
+      <capability>
+        <inputs/>
+        <outputs/>
+        <languagesSupported/>
+      </capability>
+    </capabilities>
+    <operationalProperties>
+      <modifiesCas>true</modifiesCas>
+      <multipleDeploymentAllowed>true</multipleDeploymentAllowed>
+      <outputsNewCASes>false</outputsNewCASes>
+    </operationalProperties>
+  </analysisEngineMetaData>
+</taeDescription>

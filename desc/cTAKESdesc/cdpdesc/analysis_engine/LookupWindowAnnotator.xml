@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<taeDescription xmlns="http://uima.apache.org/resourceSpecifier">
+<frameworkImplementation>org.apache.uima.java</frameworkImplementation>
+<primitive>false</primitive>
+<delegateAnalysisEngineSpecifiers>
+<delegateAnalysisEngine key="MaxLookupWindows">
+<import location="MaxLookupWindows.xml"/>
+</delegateAnalysisEngine>
+<delegateAnalysisEngine key="NP2LookupWindow">
+<import location="NP2LookupWindow.xml"/>
+</delegateAnalysisEngine>
+</delegateAnalysisEngineSpecifiers>
+<analysisEngineMetaData>
+<name>LookupWindowAnnotator</name>
+<description>Selects pre-existing annotations in the CAS to create LookupWindow annotations from.</description>
+<version></version>
+<vendor></vendor>
+<configurationParameters/>
+<configurationParameterSettings/>
+<flowConstraints>
+<fixedFlow>
+<node>NP2LookupWindow</node>
+<node>MaxLookupWindows</node>
+</fixedFlow>
+</flowConstraints>
+<fsIndexCollection/>
+<capabilities>
+<capability>
+<inputs>
+<type allAnnotatorFeatures="true">edu.mayo.bmi.uima.core.type.syntax.NP</type>
+</inputs>
+<outputs>
+<type allAnnotatorFeatures="true">edu.mayo.bmi.uima.core.type.textspan.LookupWindowAnnotation</type>
+</outputs>
+<languagesSupported/>
+</capability>
+</capabilities>
+<operationalProperties>
+<modifiesCas>true</modifiesCas>
+<multipleDeploymentAllowed>true</multipleDeploymentAllowed>
+<outputsNewCASes>false</outputsNewCASes>
+</operationalProperties>
+</analysisEngineMetaData>
+</taeDescription>

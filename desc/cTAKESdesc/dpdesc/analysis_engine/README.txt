@@ -1,0 +1,2 @@
+Do not manually edit the descriptors in this directory.  They are automatically generated using by WriteClearParserDescriptors, 
+because these analysis engines are written in UIMAFit and are not of the usual UIMA variety.

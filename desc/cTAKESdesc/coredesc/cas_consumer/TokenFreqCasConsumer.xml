@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<casConsumerDescription xmlns="http://uima.apache.org/resourceSpecifier">
+<frameworkImplementation>org.apache.uima.java</frameworkImplementation>
+<implementationName>edu.mayo.bmi.uima.core.cc.TokenFreqCasConsumer</implementationName>
+<processingResourceMetaData>
+<name>TokenFreqCasConsumer</name>
+<description> </description>
+<version>1.0</version>
+<vendor></vendor>
+<configurationParameters>
+<configurationParameter>
+<name>TokenFreqFile</name>
+<type>String</type>
+<multiValued>false</multiValued>
+<mandatory>false</mandatory>
+</configurationParameter>
+</configurationParameters>
+<configurationParameterSettings>
+<nameValuePair>
+<name>TokenFreqFile</name>
+<value>
+<string>change me</string>
+</value>
+</nameValuePair>
+</configurationParameterSettings>
+<typeSystemDescription>
+<imports>
+</imports>
+</typeSystemDescription>
+<typePriorities/>
+<fsIndexCollection/>
+<capabilities/>
+<operationalProperties>
+<modifiesCas>false</modifiesCas>
+<multipleDeploymentAllowed>false</multipleDeploymentAllowed>
+</operationalProperties>
+</processingResourceMetaData>
+</casConsumerDescription>

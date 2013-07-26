@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<casConsumerDescription xmlns="http://uima.apache.org/resourceSpecifier">
+<frameworkImplementation>org.apache.uima.java</frameworkImplementation>
+<implementationName>edu.mayo.bmi.uima.sideeffect.cc.SideEffectCasConsumer</implementationName>
+<processingResourceMetaData>
+<name>SideEffectCasConsumer</name>
+<description>Write results from SideEffectAnnotator. The output file name and delimiter are set by Parameters.
+docName|side effect|begin:end|causing drug (delimited by ',' if more than 1)|sentence containing side effect</description>
+<version>1.0</version>
+<vendor></vendor>
+<configurationParameters>
+<configurationParameter>
+<name>OutputFile</name>
+<type>String</type>
+<multiValued>false</multiValued>
+<mandatory>true</mandatory>
+</configurationParameter>
+<configurationParameter>
+<name>Delimiter</name>
+<type>String</type>
+<multiValued>false</multiValued>
+<mandatory>true</mandatory>
+</configurationParameter>
+</configurationParameters>
+<configurationParameterSettings>
+<nameValuePair>
+<name>OutputFile</name>
+<value>
+<string>r:\Dept\Sohn\Temp\sideEffects.txt</string>
+</value>
+</nameValuePair>
+<nameValuePair>
+<name>Delimiter</name>
+<value>
+<string>|</string>
+</value>
+</nameValuePair>
+</configurationParameterSettings>
+<typeSystemDescription/>
+<typePriorities/>
+<fsIndexCollection/>
+<capabilities/>
+<operationalProperties>
+<modifiesCas>false</modifiesCas>
+<multipleDeploymentAllowed>false</multipleDeploymentAllowed>
+</operationalProperties>
+</processingResourceMetaData>
+<resourceManagerConfiguration/>
+</casConsumerDescription>

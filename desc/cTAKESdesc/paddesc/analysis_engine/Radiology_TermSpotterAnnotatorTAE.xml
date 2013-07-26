@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<taeDescription xmlns="http://uima.apache.org/resourceSpecifier">
+<frameworkImplementation>org.apache.uima.java</frameworkImplementation>
+<primitive>false</primitive>
+<delegateAnalysisEngineSpecifiers>
+<delegateAnalysisEngine key="PAD_Hit">
+<import location="PAD_Hit.xml"/>
+</delegateAnalysisEngine>
+<delegateAnalysisEngine key="DxStatusAnnotator">
+<import location="DxStatusAnnotator.xml"/>
+</delegateAnalysisEngine>
+<delegateAnalysisEngine key="SimpleSegmentAnnotator">
+<import location="../../coredesc/analysis_engine/SimpleSegmentAnnotator.xml"/>
+</delegateAnalysisEngine>
+<delegateAnalysisEngine key="SubSectionBoundaryAnnotator">
+<import location="SubSectionBoundaryAnnotator.xml"/>
+</delegateAnalysisEngine>
+<delegateAnalysisEngine key="Chunker">
+<import location="../../chunkerdesc/analysis_engine/Chunker.xml"/>
+</delegateAnalysisEngine>
+<delegateAnalysisEngine key="ContextDependentTokenizerAnnotator">
+<import location="../../cdtdesc/analysis_engine/ContextDependentTokenizerAnnotator.xml"/>
+</delegateAnalysisEngine>
+<delegateAnalysisEngine key="NegationAnnotator">
+<import location="../../necontextdesc/analysis_engine/NegationAnnotator.xml"/>
+</delegateAnalysisEngine>
+<delegateAnalysisEngine key="SentenceDetectorAnnotator">
+<import location="../../coredesc/analysis_engine/SentenceDetectorAnnotator.xml"/>
+</delegateAnalysisEngine>
+<delegateAnalysisEngine key="TokenizerAnnotator">
+<import location="../../coredesc/analysis_engine/TokenizerAnnotator.xml"/>
+</delegateAnalysisEngine>
+<delegateAnalysisEngine key="NegationDxAnnotator">
+<import location="NegationDxAnnotator.xml"/>
+</delegateAnalysisEngine>
+<delegateAnalysisEngine key="POSTagger">
+<import location="../../posdesc/analysis_engine/POSTagger.xml"/>
+</delegateAnalysisEngine>
+<delegateAnalysisEngine key="Radiology_DictionaryLookupCSVAnnotator">
+<import location="Radiology_DictionaryLookupCSVAnnotator.xml"/>
+</delegateAnalysisEngine>
+</delegateAnalysisEngineSpecifiers>
+<analysisEngineMetaData>
+<name>PAD_term_spotter</name>
+<description>Term spotter for Peripheral Artery Disease (PAD) </description>
+<version>1.0</version>
+<vendor>Mayo Clinic</vendor>
+<configurationParameters searchStrategy="language_fallback">
+<configurationParameter>
+<name>ChunkCreatorClass</name>
+<type>String</type>
+<multiValued>false</multiValued>
+<mandatory>true</mandatory>
+<overrides>
+<parameter>Chunker/ChunkCreatorClass</parameter>
+</overrides>
+</configurationParameter>
+</configurationParameters>
+<configurationParameterSettings>
+<nameValuePair>
+<name>ChunkCreatorClass</name>
+<value>
+<string>edu.mayo.bmi.uima.chunker.PhraseTypeChunkCreator</string>
+</value>
+</nameValuePair>
+</configurationParameterSettings>
+<flowConstraints>
+<fixedFlow>
+<node>SimpleSegmentAnnotator</node>
+<node>TokenizerAnnotator</node>
+<node>SentenceDetectorAnnotator</node>
+<node>SubSectionBoundaryAnnotator</node>
+<node>ContextDependentTokenizerAnnotator</node>
+<node>POSTagger</node>
+<node>Chunker</node>
+<node>Radiology_DictionaryLookupCSVAnnotator</node>
+<node>NegationAnnotator</node>
+<node>PAD_Hit</node>
+<node>DxStatusAnnotator</node>
+<node>NegationDxAnnotator</node>
+</fixedFlow>
+</flowConstraints>
+<fsIndexCollection/>
+<capabilities>
+<capability>
+<inputs/>
+<outputs/>
+<languagesSupported/>
+</capability>
+</capabilities>
+<operationalProperties>
+<modifiesCas>true</modifiesCas>
+<multipleDeploymentAllowed>true</multipleDeploymentAllowed>
+<outputsNewCASes>false</outputsNewCASes>
+</operationalProperties>
+</analysisEngineMetaData>
+<resourceManagerConfiguration/>
+</taeDescription>

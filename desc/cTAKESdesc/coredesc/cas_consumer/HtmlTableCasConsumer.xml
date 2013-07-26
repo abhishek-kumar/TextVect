@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<casConsumerDescription xmlns="http://uima.apache.org/resourceSpecifier">
+  <frameworkImplementation>org.apache.uima.java</frameworkImplementation>
+  <implementationName>edu.mayo.bmi.uima.core.cc.HtmlTableCasConsumer</implementationName>
+  <processingResourceMetaData>
+    <name>HtmlTableCasConsumer</name>
+    <description>Outputs an HTML table that visualizes the specified Annotation objects over the document text.</description>
+    <version>1.0</version>
+    <vendor/>
+    <configurationParameters>
+      <configurationParameter>
+        <name>TableSpanAnnotation</name>
+        <description>Annotation span that is used for each individual HTML table.</description>
+        <type>String</type>
+        <multiValued>false</multiValued>
+        <mandatory>true</mandatory>
+      </configurationParameter>
+      <configurationParameter>
+        <name>NestedAnnotations</name>
+        <description>Annotations that are nested within a tablespan Annotation. Format is:
+
+annotation_classname
+or
+annotation_classname|getter_method</description>
+        <type>String</type>
+        <multiValued>true</multiValued>
+        <mandatory>true</mandatory>
+      </configurationParameter>
+      <configurationParameter>
+        <name>OutputDir</name>
+        <description>Directory where HTML files will be created.</description>
+        <type>String</type>
+        <multiValued>false</multiValued>
+        <mandatory>true</mandatory>
+      </configurationParameter>
+    </configurationParameters>
+    <configurationParameterSettings>
+      <nameValuePair>
+        <name>TableSpanAnnotation</name>
+        <value>
+          <string>edu.mayo.bmi.uima.core.type.textspan.Sentence</string>
+        </value>
+      </nameValuePair>
+      <nameValuePair>
+        <name>NestedAnnotations</name>
+        <value>
+          <array>
+            <string>edu.mayo.bmi.uima.core.type.syntax.BaseToken|getPennTag</string>
+          </array>
+        </value>
+      </nameValuePair>
+      <nameValuePair>
+        <name>OutputDir</name>
+        <value>
+          <string>c:\temp\uima</string>
+        </value>
+      </nameValuePair>
+    </configurationParameterSettings>
+    <typeSystemDescription/>
+    <capabilities/>
+    <operationalProperties>
+      <modifiesCas>false</modifiesCas>
+      <multipleDeploymentAllowed>false</multipleDeploymentAllowed>
+    </operationalProperties>
+  </processingResourceMetaData>
+</casConsumerDescription>

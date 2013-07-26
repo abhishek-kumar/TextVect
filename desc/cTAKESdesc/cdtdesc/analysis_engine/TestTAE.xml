@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<taeDescription xmlns="http://uima.apache.org/resourceSpecifier">
+<frameworkImplementation>org.apache.uima.java</frameworkImplementation>
+<primitive>false</primitive>
+<delegateAnalysisEngineSpecifiers>
+<delegateAnalysisEngine key="SentenceDetectorAnnotator">
+<import location="file:../../coredesc/analysis_engine/SentenceDetectorAnnotator.xml"/>
+</delegateAnalysisEngine>
+<delegateAnalysisEngine key="SimpleSegmentAnnotator">
+<import location="file:../../coredesc/analysis_engine/SimpleSegmentAnnotator.xml"/>
+</delegateAnalysisEngine>
+<delegateAnalysisEngine key="ContextDependentTokenizerAnnotator">
+<import location="file:ContextDependentTokenizerAnnotator.xml"/>
+</delegateAnalysisEngine>
+<delegateAnalysisEngine key="TokenizerAnnotator">
+<import location="file:../../coredesc/analysis_engine/TokenizerAnnotator.xml"/>
+</delegateAnalysisEngine>
+</delegateAnalysisEngineSpecifiers>
+<analysisEngineMetaData>
+<name>TestTAE</name>
+<configurationParameters/>
+<configurationParameterSettings/>
+<flowConstraints>
+<fixedFlow>
+<node>SimpleSegmentAnnotator</node>
+<node>TokenizerAnnotator</node>
+<node>SentenceDetectorAnnotator</node>
+<node>ContextDependentTokenizerAnnotator</node>
+</fixedFlow>
+</flowConstraints>
+<fsIndexCollection/>
+<capabilities>
+<capability>
+<inputs/>
+<outputs/>
+<languagesSupported/>
+</capability>
+</capabilities>
+<operationalProperties>
+<modifiesCas>true</modifiesCas>
+<multipleDeploymentAllowed>true</multipleDeploymentAllowed>
+</operationalProperties>
+</analysisEngineMetaData>
+</taeDescription>

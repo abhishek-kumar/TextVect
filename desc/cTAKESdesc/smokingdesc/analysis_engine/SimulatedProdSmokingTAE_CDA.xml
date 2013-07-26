@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<taeDescription xmlns="http://uima.apache.org/resourceSpecifier">
+<frameworkImplementation>org.apache.uima.java</frameworkImplementation>
+<primitive>false</primitive>
+<delegateAnalysisEngineSpecifiers>
+<delegateAnalysisEngine key="SentenceAdjuster">
+<import name="analysis_engine.SentenceAdjuster"/>
+</delegateAnalysisEngine>
+<delegateAnalysisEngine key="KuRuleBasedClassifierAnnotator">
+<import name="analysis_engine.KuRuleBasedClassifierAnnotator"/>
+</delegateAnalysisEngine>
+<delegateAnalysisEngine key="ClassifiableEntriesAnnotator">
+<import name="analysis_engine.ClassifiableEntriesAnnotator"/>
+</delegateAnalysisEngine>
+<delegateAnalysisEngine key="ExternalBaseAggregateTAE_CDA">
+<import location="ExternalBaseAggregateTAE_CDA.xml"/>
+</delegateAnalysisEngine>
+</delegateAnalysisEngineSpecifiers>
+<analysisEngineMetaData>
+<name>SimulatedProdAggregateTAE_CDA</name>
+<description>Simulates a production pipeline. This Aggregate includes Token, Sentence,SentenceAdjuster, ClassifiableEntries (which inturn invokes ProductionPostSentenceAggregate annotators internally).
+
+Note:
+1)Version is intented to handle XML documents which adhere to the Clinical Document Architecture (CDA)</description>
+<version>1.0</version>
+<vendor>Mayo</vendor>
+<configurationParameters searchStrategy="language_fallback"/>
+<configurationParameterSettings/>
+<flowConstraints>
+<fixedFlow>
+<node>ExternalBaseAggregateTAE_CDA</node>
+<node>SentenceAdjuster</node>
+<node>ClassifiableEntriesAnnotator</node>
+</fixedFlow>
+</flowConstraints>
+<typePriorities/>
+<fsIndexCollection/>
+<capabilities>
+<capability>
+<inputs/>
+<outputs/>
+<outputSofas>
+<sofaName>plaintext</sofaName>
+</outputSofas>
+<languagesSupported/>
+</capability>
+</capabilities>
+<operationalProperties>
+<modifiesCas>true</modifiesCas>
+<multipleDeploymentAllowed>true</multipleDeploymentAllowed>
+<outputsNewCASes>false</outputsNewCASes>
+</operationalProperties>
+</analysisEngineMetaData>
+<resourceManagerConfiguration/>
+<sofaMappings>
+<sofaMapping>
+<componentKey>ClassifiableEntriesAnnotator</componentKey>
+<aggregateSofaName>plaintext</aggregateSofaName>
+</sofaMapping>
+<sofaMapping>
+<componentKey>KuRuleBasedClassifierAnnotator</componentKey>
+<aggregateSofaName>plaintext</aggregateSofaName>
+</sofaMapping>
+<sofaMapping>
+<componentKey>SentenceAdjuster</componentKey>
+<aggregateSofaName>plaintext</aggregateSofaName>
+</sofaMapping>
+</sofaMappings>
+</taeDescription>

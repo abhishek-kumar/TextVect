@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<collectionReaderDescription xmlns="http://uima.apache.org/resourceSpecifier">
+<frameworkImplementation>org.apache.uima.java</frameworkImplementation>
+<implementationName>edu.mayo.bmi.uima.pos_tagger.OpenNLPPOSCollectionReader</implementationName>
+<processingResourceMetaData>
+<name>OpenNLPPOSCollectionReader</name>
+<description>For testing the POS tagger annotator and Chunker annotator.
+
+Reads POS tagged sentences (lines) from a file and creates BaseToken annotations.  Optionally assigns partOfSpeech attributes.
+
+Also creates Sentence annotations.</description>
+<version>1.0</version>
+<vendor></vendor>
+<configurationParameters>
+<configurationParameter>
+<name>PosDataFile</name>
+<type>String</type>
+<multiValued>false</multiValued>
+<mandatory>true</mandatory>
+</configurationParameter>
+<configurationParameter>
+<name>LoadWordsOnly</name>
+<type>Boolean</type>
+<multiValued>false</multiValued>
+<mandatory>false</mandatory>
+</configurationParameter>
+</configurationParameters>
+<configurationParameterSettings/>
+<typeSystemDescription>
+<imports>
+</imports>
+</typeSystemDescription>
+<typePriorities/>
+<fsIndexCollection/>
+<capabilities>
+<capability>
+<inputs/>
+<outputs/>
+<languagesSupported/>
+</capability>
+</capabilities>
+<operationalProperties>
+<modifiesCas>true</modifiesCas>
+<multipleDeploymentAllowed>false</multipleDeploymentAllowed>
+<outputsNewCASes>true</outputsNewCASes>
+</operationalProperties>
+</processingResourceMetaData>
+<resourceManagerConfiguration/>
+</collectionReaderDescription>

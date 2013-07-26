@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<typeSystemDescription xmlns="http://uima.apache.org/resourceSpecifier">
+  <name>PADSiteAndTerm</name>
+  <description>Represents Term and Location entities required for PAD project.</description>
+  <version>1.0</version>
+  <vendor>Mayo</vendor>
+  <imports>
+    <import location="../../common-type-system/desc/common_type_system.xml"/>
+    <import location="SubSection.xml"/>
+  </imports>
+  <types>
+    <typeDescription>
+      <name>edu.mayo.bmi.uima.pad.type.PADTerm</name>
+      <description/>
+      <supertypeName>edu.mayo.bmi.uima.core.type.textsem.IdentifiedAnnotation</supertypeName>
+      <features>
+        <featureDescription>
+          <name>hitDictionaryValue</name>
+          <description>Value from the Dictionary that was successfully looked up</description>
+          <rangeTypeName>uima.cas.String</rangeTypeName>
+        </featureDescription>
+        <featureDescription>
+          <name>isStandAlone</name>
+          <description>Identifies weather this term needs another dictionary hit to be considered as a valid hit. Currently this is being used for Unstable Angina which requires "Term" and "Location" to be present in the text to be considered as a valid hit.
+
+Valid values are 0 and 1. Where, 0 is false (not standalone) and 1 is true (is standalone)</description>
+          <rangeTypeName>uima.cas.Integer</rangeTypeName>
+        </featureDescription>
+        <featureDescription>
+          <name>relatedTokens</name>
+          <description>identifies the token that this PADTerm spans</description>
+          <rangeTypeName>uima.cas.FSArray</rangeTypeName>
+        </featureDescription>
+      </features>
+    </typeDescription>
+    <typeDescription>
+      <name>edu.mayo.bmi.uima.pad.type.PADLocation</name>
+      <description/>
+      <supertypeName>edu.mayo.bmi.uima.core.type.textsem.IdentifiedAnnotation</supertypeName>
+      <features>
+        <featureDescription>
+          <name>hitDictionaryValue</name>
+          <description>Value from the Dictionary that was successfully looked up</description>
+          <rangeTypeName>uima.cas.String</rangeTypeName>
+        </featureDescription>
+        <featureDescription>
+          <name>isStandAlone</name>
+          <description>Identifies weather this term needs another dictionary hit to be considered as a valid hit. Currently this is being used for Unstable Angina which requires "Term" and "Location" to be present in the text to be considered as a valid hit.
+
+Valid values are 0 and 1. Where, 0 is false (not standalone) and 1 is true (is standalone)</description>
+          <rangeTypeName>uima.cas.Integer</rangeTypeName>
+        </featureDescription>
+        <featureDescription>
+          <name>relatedTokens</name>
+          <description>identifies the token that this PADTerm spans</description>
+          <rangeTypeName>uima.cas.FSArray</rangeTypeName>
+        </featureDescription>
+      </features>
+    </typeDescription>
+    <typeDescription>
+      <name>edu.mayo.bmi.uima.pad.type.PADHit</name>
+      <description>Would represent one of the following
+Term (in the case of a stand alone term)
+Term + Location
+Location + term</description>
+      <supertypeName>edu.mayo.bmi.uima.core.type.textsem.IdentifiedAnnotation</supertypeName>
+      <features>
+        <featureDescription>
+          <name>uaTerm</name>
+          <description/>
+          <rangeTypeName>edu.mayo.bmi.uima.pad.type.PADTerm</rangeTypeName>
+        </featureDescription>
+        <featureDescription>
+          <name>uaLocation</name>
+          <description/>
+          <rangeTypeName>edu.mayo.bmi.uima.pad.type.PADLocation</rangeTypeName>
+        </featureDescription>
+      </features>
+    </typeDescription>
+  </types>
+</typeSystemDescription>

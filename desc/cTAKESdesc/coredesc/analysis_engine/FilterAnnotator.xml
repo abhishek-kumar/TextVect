@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<taeDescription xmlns="http://uima.apache.org/resourceSpecifier">
+  <frameworkImplementation>org.apache.uima.java</frameworkImplementation>
+  <primitive>true</primitive>
+  <annotatorImplementationName>edu.mayo.bmi.uima.core.ae.FilterAnnotator</annotatorImplementationName>
+  <analysisEngineMetaData>
+    <name>filterAnnotator</name>
+    <description>Removes annotations other than the one specified form CAS.
+
+TODO:
+1) Parameterize type to retain
+2) Parameterize features</description>
+    <version>1.0</version>
+    <vendor>Mayo</vendor>
+    <configurationParameters/>
+    <configurationParameterSettings/>
+    <typeSystemDescription/>
+    <capabilities>
+      <capability>
+        <inputs/>
+        <outputs/>
+        <languagesSupported/>
+      </capability>
+    </capabilities>
+    <operationalProperties>
+      <modifiesCas>true</modifiesCas>
+      <multipleDeploymentAllowed>true</multipleDeploymentAllowed>
+    </operationalProperties>
+  </analysisEngineMetaData>
+</taeDescription>

@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<taeDescription xmlns="http://uima.apache.org/resourceSpecifier">
+  <frameworkImplementation>org.apache.uima.java</frameworkImplementation>
+  <primitive>true</primitive>
+  <annotatorImplementationName>edu.mayo.bmi.uima.core.ae.SentenceDetector</annotatorImplementationName>
+  <analysisEngineMetaData>
+    <name>Sentence Detector annotator</name>
+    <description>Discovers sentence boundaries.</description>
+    <version>2.1</version>
+    <vendor>Mayo Clinic</vendor>
+    <configurationParameters>
+      <configurationParameter>
+        <name>SegmentsToSkip</name>
+        <type>String</type>
+        <multiValued>true</multiValued>
+        <mandatory>false</mandatory>
+      </configurationParameter>
+    </configurationParameters>
+    <configurationParameterSettings>
+      <nameValuePair>
+        <name>SegmentsToSkip</name>
+        <value>
+          <array/>
+        </value>
+      </nameValuePair>
+    </configurationParameterSettings>
+    <typeSystemDescription/>
+    <typePriorities/>
+    <fsIndexCollection/>
+    <capabilities>
+      <capability>
+        <inputs>
+          <type allAnnotatorFeatures="true">edu.mayo.bmi.uima.core.type.syntax.BaseToken</type>
+        </inputs>
+        <outputs>
+          <type allAnnotatorFeatures="true">edu.mayo.bmi.uima.core.type.textspan.Sentence</type>
+        </outputs>
+        <languagesSupported/>
+      </capability>
+    </capabilities>
+    <operationalProperties>
+      <modifiesCas>true</modifiesCas>
+      <multipleDeploymentAllowed>true</multipleDeploymentAllowed>
+      <outputsNewCASes>false</outputsNewCASes>
+    </operationalProperties>
+  </analysisEngineMetaData>
+  <externalResourceDependencies>
+    <externalResourceDependency>
+      <key>MaxentModel</key>
+      <description/>
+      <interfaceName>org.apache.uima.resource.SharedResourceObject</interfaceName>
+      <optional>false</optional>
+    </externalResourceDependency>
+  </externalResourceDependencies>
+  <resourceManagerConfiguration>
+    <externalResources>
+      <externalResource>
+        <name>MaxentModelFile</name>
+        <description/>
+        <fileResourceSpecifier>
+          <fileUrl>file:coreresources/sentdetect/sdmed.mod</fileUrl>
+        </fileResourceSpecifier>
+        <implementationName>edu.mayo.bmi.uima.core.resource.SuffixMaxentModelResourceImpl</implementationName>
+      </externalResource>
+    </externalResources>
+    <externalResourceBindings>
+      <externalResourceBinding>
+        <key>MaxentModel</key>
+        <resourceName>MaxentModelFile</resourceName>
+      </externalResourceBinding>
+    </externalResourceBindings>
+  </resourceManagerConfiguration>
+</taeDescription>

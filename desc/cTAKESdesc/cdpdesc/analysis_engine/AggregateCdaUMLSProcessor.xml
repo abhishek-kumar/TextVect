@@ -1,0 +1,203 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<analysisEngineDescription xmlns="http://uima.apache.org/resourceSpecifier">
+<frameworkImplementation>org.apache.uima.java</frameworkImplementation>
+<primitive>false</primitive>
+<delegateAnalysisEngineSpecifiers>
+<delegateAnalysisEngine key="LookupWindowAnnotator">
+<import location="LookupWindowAnnotator.xml"/>
+</delegateAnalysisEngine>
+<delegateAnalysisEngine key="CdaCasInitializer">
+<import location="../../docpredesc/cas_initializer/CdaCasInitializer.xml"/>
+</delegateAnalysisEngine>
+<delegateAnalysisEngine key="Chunker">
+<import location="../../chunkerdesc/analysis_engine/Chunker.xml"/>
+</delegateAnalysisEngine>
+<delegateAnalysisEngine key="AdjustNounPhraseToIncludeFollowingNP">
+<import location="../../chunkerdesc/analysis_engine/AdjustNounPhraseToIncludeFollowingNP.xml"/>
+</delegateAnalysisEngine>
+<delegateAnalysisEngine key="AdjustNounPhraseToIncludeFollowingPPNP">
+<import location="../../chunkerdesc/analysis_engine/AdjustNounPhraseToIncludeFollowingPPNP.xml"/>
+</delegateAnalysisEngine>
+<delegateAnalysisEngine key="ExtractionPrepAnnotator">
+<import location="ExtractionPrepAnnotator.xml"/>
+</delegateAnalysisEngine>
+<delegateAnalysisEngine key="NegationAnnotator">
+<import location="../../necontextdesc/analysis_engine/NegationAnnotator.xml"/>
+</delegateAnalysisEngine>
+<delegateAnalysisEngine key="SentenceDetectorAnnotator">
+<import location="../../coredesc/analysis_engine/SentenceDetectorAnnotator.xml"/>
+</delegateAnalysisEngine>
+<delegateAnalysisEngine key="TokenizerAnnotator">
+<import location="../../coredesc/analysis_engine/TokenizerAnnotator.xml"/>
+</delegateAnalysisEngine>
+<delegateAnalysisEngine key="POSTagger">
+<import location="../../posdesc/analysis_engine/POSTagger.xml"/>
+</delegateAnalysisEngine>
+<delegateAnalysisEngine key="StatusAnnotator">
+<import location="../../necontextdesc/analysis_engine/StatusAnnotator.xml"/>
+</delegateAnalysisEngine>
+<delegateAnalysisEngine key="LvgAnnotator">
+<import location="../../lvgdesc/analysis_engine/LvgAnnotator.xml"/>
+</delegateAnalysisEngine>
+<delegateAnalysisEngine key="ContextDependentTokenizerAnnotator">
+<import location="../../cdtdesc/analysis_engine/ContextDependentTokenizerAnnotator.xml"/>
+</delegateAnalysisEngine>
+<delegateAnalysisEngine key="DictionaryLookupAnnotatorDB">
+<import location="../../lookupdesc/analysis_engine/DictionaryLookupAnnotatorUMLS.xml"/>
+</delegateAnalysisEngine>
+<delegateAnalysisEngine key="AssertionAnnotator">
+<import location="../../assertiondesc/AssertionMiniPipelineAnalysisEngine.xml"/>
+</delegateAnalysisEngine>
+<delegateAnalysisEngine key="DependencyParser">
+<import location="../../dpdesc/analysis_engine/ClearParserDependencyParserAE.xml"/>
+</delegateAnalysisEngine>
+</delegateAnalysisEngineSpecifiers>
+<analysisEngineMetaData>
+<name>AggregateCdaUMLSProcessor</name>
+<description>Runs the complete pipeline for annotating clinical documents in CDA format using the built in UMLS (SNOMEDCT and RxNORM) dictionaries. 
+This uses the 'dictionary lookup/desc/DictionaryLookupAnnotatorUMLS.xml' descriptor and requires an UMLS license.
+Please update DictionaryLookupAnnotatorUMLS.xml file with your UMLS username and password.
+</description>
+<version></version>
+<vendor></vendor>
+<configurationParameters searchStrategy="language_fallback">
+<configurationParameter>
+<name>ChunkCreatorClass</name>
+<type>String</type>
+<multiValued>false</multiValued>
+<mandatory>true</mandatory>
+<overrides>
+<parameter>Chunker/ChunkCreatorClass</parameter>
+</overrides>
+</configurationParameter>
+</configurationParameters>
+<configurationParameterSettings>
+<nameValuePair>
+<name>ChunkCreatorClass</name>
+<value>
+<string>edu.mayo.bmi.uima.chunker.PhraseTypeChunkCreator</string>
+</value>
+</nameValuePair>
+</configurationParameterSettings>
+<flowConstraints>
+<fixedFlow>
+<node>CdaCasInitializer</node>
+<node>SentenceDetectorAnnotator</node>
+<node>TokenizerAnnotator</node>
+<node>LvgAnnotator</node>
+<node>ContextDependentTokenizerAnnotator</node>
+<node>POSTagger</node>
+<node>Chunker</node>
+<node>AdjustNounPhraseToIncludeFollowingNP</node>
+<node>AdjustNounPhraseToIncludeFollowingPPNP</node>
+<node>LookupWindowAnnotator</node>
+<node>DictionaryLookupAnnotatorDB</node>
+<node>DependencyParser</node>
+<node>AssertionAnnotator</node>
+<!-- 
+	<node>StatusAnnotator</node>
+	<node>NegationAnnotator</node>
+ -->
+<node>ExtractionPrepAnnotator</node>
+</fixedFlow>
+</flowConstraints>
+<typePriorities>
+<name>Ordering</name>
+<description>For subiterator</description>
+<version>1.0</version>
+<priorityList>
+<type>edu.mayo.bmi.uima.core.type.textspan.Segment</type>
+<type>edu.mayo.bmi.uima.core.type.textspan.Sentence</type>
+<type>edu.mayo.bmi.uima.core.type.syntax.BaseToken</type>
+</priorityList>
+<priorityList>
+<type>edu.mayo.bmi.uima.core.type.textspan.Sentence</type>
+<type>edu.mayo.bmi.uima.core.type.textsem.IdentifiedAnnotation</type>
+</priorityList>
+</typePriorities>
+<fsIndexCollection/>
+<capabilities>
+<capability>
+<inputs/>
+<outputs/>
+<outputSofas>
+<sofaName>plaintext</sofaName>
+</outputSofas>
+<languagesSupported/>
+</capability>
+</capabilities>
+<operationalProperties>
+<modifiesCas>true</modifiesCas>
+<multipleDeploymentAllowed>true</multipleDeploymentAllowed>
+<outputsNewCASes>false</outputsNewCASes>
+</operationalProperties>
+</analysisEngineMetaData>
+<resourceManagerConfiguration/>
+<sofaMappings>
+<sofaMapping>
+<componentKey>ExtractionPrepAnnotator</componentKey>
+<aggregateSofaName>plaintext</aggregateSofaName>
+</sofaMapping>
+<sofaMapping>
+<componentKey>StatusAnnotator</componentKey>
+<aggregateSofaName>plaintext</aggregateSofaName>
+</sofaMapping>
+<sofaMapping>
+<componentKey>SentenceDetectorAnnotator</componentKey>
+<aggregateSofaName>plaintext</aggregateSofaName>
+</sofaMapping>
+<sofaMapping>
+<componentKey>TokenizerAnnotator</componentKey>
+<aggregateSofaName>plaintext</aggregateSofaName>
+</sofaMapping>
+<sofaMapping>
+<componentKey>POSTagger</componentKey>
+<aggregateSofaName>plaintext</aggregateSofaName>
+</sofaMapping>
+<sofaMapping>
+<componentKey>Chunker</componentKey>
+<aggregateSofaName>plaintext</aggregateSofaName>
+</sofaMapping>
+<sofaMapping>
+<componentKey>AdjustNounPhraseToIncludeFollowingNP</componentKey>
+<aggregateSofaName>plaintext</aggregateSofaName>
+</sofaMapping>
+<sofaMapping>
+<componentKey>AdjustNounPhraseToIncludeFollowingPPNP</componentKey>
+<aggregateSofaName>plaintext</aggregateSofaName>
+</sofaMapping>
+<sofaMapping>
+<componentKey>ContextDependentTokenizerAnnotator</componentKey>
+<aggregateSofaName>plaintext</aggregateSofaName>
+</sofaMapping>
+<sofaMapping>
+<componentKey>DictionaryLookupAnnotatorDB</componentKey>
+<aggregateSofaName>plaintext</aggregateSofaName>
+</sofaMapping>
+<sofaMapping>
+<componentKey>NegationAnnotator</componentKey>
+<aggregateSofaName>plaintext</aggregateSofaName>
+</sofaMapping>
+<sofaMapping>
+<componentKey>CdaCasInitializer</componentKey>
+<componentSofaName>plaintext</componentSofaName>
+<aggregateSofaName>plaintext</aggregateSofaName>
+</sofaMapping>
+<sofaMapping>
+<componentKey>LookupWindowAnnotator</componentKey>
+<aggregateSofaName>plaintext</aggregateSofaName>
+</sofaMapping>
+<sofaMapping>
+<componentKey>LvgAnnotator</componentKey>
+<aggregateSofaName>plaintext</aggregateSofaName>
+</sofaMapping>
+<sofaMapping>
+<componentKey>DependencyParser</componentKey>
+<aggregateSofaName>plaintext</aggregateSofaName>
+</sofaMapping>
+<sofaMapping>
+<componentKey>AssertionAnnotator</componentKey>
+<aggregateSofaName>plaintext</aggregateSofaName>
+</sofaMapping>
+</sofaMappings>
+</analysisEngineDescription>

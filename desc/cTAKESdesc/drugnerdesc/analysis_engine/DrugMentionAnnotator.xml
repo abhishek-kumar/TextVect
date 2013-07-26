@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<taeDescription xmlns="http://uima.apache.org/resourceSpecifier">
+  <frameworkImplementation>org.apache.uima.java</frameworkImplementation>
+  <primitive>true</primitive>
+  <annotatorImplementationName>edu.mayo.bmi.uima.drugner.ae.DrugMentionAnnotator</annotatorImplementationName>
+  <analysisEngineMetaData>
+    <name>DrugMentionAnnotator</name>
+    <description>Generates DrugMentions and related attributes such as strength, dosage, frequency, etc.</description>
+    <version>1.0</version>
+    <vendor>Mayo</vendor>
+    <configurationParameters>
+      <configurationParameter>
+        <name>medicationRelatedSection</name>
+        <description>Section ids that need to be considered when generating the DrugMentionAnnotation</description>
+        <type>String</type>
+        <multiValued>true</multiValued>
+        <mandatory>false</mandatory>
+      </configurationParameter>
+    </configurationParameters>
+    <configurationParameterSettings>
+      <nameValuePair>
+        <name>medicationRelatedSection</name>
+        <value>
+          <array>
+            <string>20101</string>
+            <string>20102</string>
+            <string>20103</string>
+            <string>20104</string>
+            <string>20105</string>
+            <string>20106</string>
+            <string>20107</string>
+            <string>20108</string>
+            <string>20109</string>
+            <string>20110</string>
+            <string>20111</string>
+            <string>20112</string>
+            <string>20113</string>
+            <string>20114</string>
+            <string>20115</string>
+            <string>20116</string>
+            <string>20117</string>
+            <string>20118</string>
+            <string>20119</string>
+            <string>20120</string>
+            <string>20121</string>
+            <string>20122</string>
+            <string>20123</string>
+            <string>20124</string>
+            <string>20125</string>
+            <string>20126</string>
+            <string>20127</string>
+            <string>20128</string>
+            <string>20129</string>
+            <string>20130</string>
+            <string>20110</string>
+            <string>20133</string>
+            <string>20147</string>
+            <string>SIMPLE_SEGMENT</string>
+          </array>
+        </value>
+      </nameValuePair>
+    </configurationParameterSettings>
+    <typeSystemDescription/>
+    <typePriorities/>
+    <fsIndexCollection/>
+    <capabilities>
+      <capability>
+        <inputs>
+          <type allAnnotatorFeatures="true">uima.tcas.Annotation</type>
+        </inputs>
+        <outputs>
+          <type allAnnotatorFeatures="true">edu.mayo.bmi.uima.drugner.type.RangeAnnotation</type>
+          <type allAnnotatorFeatures="true">edu.mayo.bmi.uima.drugner.type.MeasurementAnnotation</type>
+          <type allAnnotatorFeatures="true">edu.mayo.bmi.uima.drugner.type.FractionAnnotation</type>
+          <type allAnnotatorFeatures="true">edu.mayo.bmi.uima.drugner.type.DrugMentionAnnotation</type>
+        </outputs>
+        <languagesSupported/>
+      </capability>
+    </capabilities>
+    <operationalProperties>
+      <modifiesCas>true</modifiesCas>
+      <multipleDeploymentAllowed>true</multipleDeploymentAllowed>
+      <outputsNewCASes>false</outputsNewCASes>
+    </operationalProperties>
+  </analysisEngineMetaData>
+  <resourceManagerConfiguration/>
+</taeDescription>

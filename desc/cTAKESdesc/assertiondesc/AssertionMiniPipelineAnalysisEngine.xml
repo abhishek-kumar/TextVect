@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<analysisEngineDescription xmlns="http://uima.apache.org/resourceSpecifier">
+  <frameworkImplementation>org.apache.uima.java</frameworkImplementation>
+  <primitive>false</primitive>
+  <delegateAnalysisEngineSpecifiers>
+    <delegateAnalysisEngine key="assertionAnalysisEngine">
+      <import location="assertionAnalysisEngine.xml"/>
+    </delegateAnalysisEngine>
+    <delegateAnalysisEngine key="conceptConverterAnalysisEngine">
+      <import location="conceptConverterAnalysisEngine.xml"/>
+    </delegateAnalysisEngine>
+    <delegateAnalysisEngine key="SubjectAttributeAnalysisEngine">
+      <import location="SubjectAttributeAnalysisEngine.xml"/>
+    </delegateAnalysisEngine>
+    <delegateAnalysisEngine key="GenericAttributeAnalysisEngine">
+      <import location="GenericAttributeAnalysisEngine.xml"/>
+    </delegateAnalysisEngine>
+  </delegateAnalysisEngineSpecifiers>
+  <analysisEngineMetaData>
+    <name>assertionMiniPipelineAnalysisEngine</name>
+    <description/>
+    <version>1.0</version>
+    <vendor/>
+    <configurationParameters/>
+    <configurationParameterSettings/>
+    <flowConstraints>
+      <fixedFlow>
+        <node>conceptConverterAnalysisEngine</node>
+        <node>assertionAnalysisEngine</node>
+        <node>GenericAttributeAnalysisEngine</node>
+        <node>SubjectAttributeAnalysisEngine</node>
+      </fixedFlow>
+    </flowConstraints>
+    <fsIndexCollection/>
+    <capabilities>
+      <capability>
+        <inputs>
+          <type allAnnotatorFeatures="true">edu.mayo.bmi.uima.core.type.refsem.UmlsConcept</type>
+          <type allAnnotatorFeatures="true">edu.mayo.bmi.uima.core.type.refsem.OntologyConcept</type>
+          <type allAnnotatorFeatures="true">edu.mayo.bmi.uima.core.type.textsem.EntityMention</type>
+          <type allAnnotatorFeatures="true">edu.mayo.bmi.uima.core.type.syntax.BaseToken</type>
+        </inputs>
+        <outputs>
+          <type allAnnotatorFeatures="true">edu.mayo.bmi.uima.core.type.textsem.EntityMention</type>
+        </outputs>
+        <languagesSupported/>
+      </capability>
+    </capabilities>
+    <operationalProperties>
+      <modifiesCas>true</modifiesCas>
+      <multipleDeploymentAllowed>true</multipleDeploymentAllowed>
+      <outputsNewCASes>false</outputsNewCASes>
+    </operationalProperties>
+  </analysisEngineMetaData>
+  <resourceManagerConfiguration/>
+</analysisEngineDescription>

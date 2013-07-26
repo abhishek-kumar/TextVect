@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<taeDescription xmlns="http://uima.apache.org/resourceSpecifier">
+<frameworkImplementation>org.apache.uima.java</frameworkImplementation>
+<primitive>false</primitive>
+<delegateAnalysisEngineSpecifiers>
+<delegateAnalysisEngine key="SentenceAdjuster">
+<import location="SentenceAdjuster.xml"/>
+</delegateAnalysisEngine>
+<delegateAnalysisEngine key="KuRuleBasedClassifierAnnotator">
+<import location="KuRuleBasedClassifierAnnotator.xml"/>
+</delegateAnalysisEngine>
+<delegateAnalysisEngine key="ClassifiableEntriesAnnotator">
+<import location="ClassifiableEntriesAnnotator.xml"/>
+</delegateAnalysisEngine>
+<delegateAnalysisEngine key="ExternalBaseAggregateTAE">
+<import location="ExternalBaseAggregateTAE.xml"/>
+</delegateAnalysisEngine>
+</delegateAnalysisEngineSpecifiers>
+<analysisEngineMetaData>
+<name>SimulatedProdAggregateTAE</name>
+<description>Simulates a production pipeline. This Aggregate includes Token, Sentence,SentenceAdjuster, ClassifiableEntries (which in turn invokes ProductionPostSentenceAggregate annotators internally).
+</description>
+<version>1.0</version>
+<vendor>Mayo</vendor>
+<configurationParameters searchStrategy="language_fallback"/>
+<configurationParameterSettings/>
+<flowConstraints>
+<fixedFlow>
+<node>ExternalBaseAggregateTAE</node>
+<node>SentenceAdjuster</node>
+<node>ClassifiableEntriesAnnotator</node>
+</fixedFlow>
+</flowConstraints>
+<typePriorities/>
+<fsIndexCollection/>
+<capabilities>
+<capability>
+<inputs/>
+<outputs/>
+<languagesSupported/>
+</capability>
+</capabilities>
+<operationalProperties>
+<modifiesCas>true</modifiesCas>
+<multipleDeploymentAllowed>true</multipleDeploymentAllowed>
+<outputsNewCASes>false</outputsNewCASes>
+</operationalProperties>
+</analysisEngineMetaData>
+<resourceManagerConfiguration/>
+</taeDescription>

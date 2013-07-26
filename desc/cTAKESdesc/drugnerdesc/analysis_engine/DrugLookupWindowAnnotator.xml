@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<taeDescription xmlns="http://uima.apache.org/resourceSpecifier">
+  <frameworkImplementation>org.apache.uima.java</frameworkImplementation>
+  <primitive>false</primitive>
+  <delegateAnalysisEngineSpecifiers>
+    <delegateAnalysisEngine key="NP2LookupWindow">
+      <import location="../../cdpdesc/analysis_engine/NP2LookupWindow.xml"/>
+    </delegateAnalysisEngine>
+    <delegateAnalysisEngine key="DrugCNP2LookupWindow">
+      <import location="DrugCNP2LookupWindow.xml"/>
+    </delegateAnalysisEngine>
+    <delegateAnalysisEngine key="MaxLookupWindows">
+      <import location="../../cdpdesc/analysis_engine/MaxLookupWindows.xml"/>
+    </delegateAnalysisEngine>
+  </delegateAnalysisEngineSpecifiers>
+  <analysisEngineMetaData>
+    <name>LookupWindowAnnotator</name>
+    <description>Selects pre-existing annotations in the CAS to become LookupWindow annotations.</description>
+    <version/>
+    <vendor/>
+    <configurationParameters searchStrategy="language_fallback"/>
+    <configurationParameterSettings/>
+    <flowConstraints>
+      <fixedFlow>
+        <node>MaxLookupWindows</node>
+        <node>NP2LookupWindow</node>
+        <node>DrugCNP2LookupWindow</node>
+      </fixedFlow>
+    </flowConstraints>
+    <typePriorities/>
+    <fsIndexCollection/>
+    <capabilities>
+      <capability>
+        <inputs>
+          <type allAnnotatorFeatures="true">edu.mayo.bmi.uima.cdt.type.ProblemListAnnotation</type>
+          <type allAnnotatorFeatures="true">uima.tt.PNPAnnotation</type>
+          <type allAnnotatorFeatures="true">uima.tt.NPSAnnotation</type>
+          <type allAnnotatorFeatures="true">uima.tt.NPPAnnotation</type>
+          <type allAnnotatorFeatures="true">uima.tt.NPListAnnotation</type>
+          <type allAnnotatorFeatures="true">uima.tt.NPAnnotation</type>
+          <type allAnnotatorFeatures="true">uima.tt.CNPAnnotation</type>
+          <type allAnnotatorFeatures="true">edu.mayo.bmi.uima.core.type.textspan.Segment</type>
+          <type allAnnotatorFeatures="true">edu.mayo.bmi.uima.chunker.type.NP</type>
+        </inputs>
+        <outputs>
+          <type allAnnotatorFeatures="true">edu.mayo.bmi.uima.lookup.type.LookupWindowAnnotation</type>
+          <type allAnnotatorFeatures="true">edu.mayo.bmi.uima.lookup.type.DrugLookupWindowAnnotation</type>
+        </outputs>
+        <languagesSupported/>
+      </capability>
+    </capabilities>
+    <operationalProperties>
+      <modifiesCas>true</modifiesCas>
+      <multipleDeploymentAllowed>true</multipleDeploymentAllowed>
+      <outputsNewCASes>false</outputsNewCASes>
+    </operationalProperties>
+  </analysisEngineMetaData>
+  <resourceManagerConfiguration/>
+</taeDescription>

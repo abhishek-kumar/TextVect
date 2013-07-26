@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<typeSystemDescription xmlns="http://uima.apache.org/resourceSpecifier">
+  <name>SmokingProductionTypeSystem</name>
+  <description/>
+  <version>1.0</version>
+  <vendor/>
+  <imports>
+    <import location="../../common-type-system/desc/common_type_system.xml"/>
+    <import location="LibSVMTypeSystem.xml"/>
+    <import location="I2b2TypeSystem.xml"/>
+  </imports>
+  <types>
+    <typeDescription>
+      <name>edu.mayo.bmi.smoking.i2b2.type.RecordSentence</name>
+      <description>Represents a single sentence from an I2B2 record.</description>
+      <supertypeName>uima.tcas.Annotation</supertypeName>
+      <features>
+        <featureDescription>
+          <name>recordID</name>
+          <description>ID of record that this sentence belongs to.</description>
+          <rangeTypeName>uima.cas.String</rangeTypeName>
+        </featureDescription>
+        <featureDescription>
+          <name>classification</name>
+          <description>Smoking status classification for the given sentence.</description>
+          <rangeTypeName>uima.cas.String</rangeTypeName>
+        </featureDescription>
+        <featureDescription>
+          <name>recordTextBegin</name>
+          <description>Begin offset of the sentence relative to the entire record text.</description>
+          <rangeTypeName>uima.cas.Integer</rangeTypeName>
+        </featureDescription>
+        <featureDescription>
+          <name>recordTextEnd</name>
+          <description>End offset of the sentence relative to the entire record text.</description>
+          <rangeTypeName>uima.cas.Integer</rangeTypeName>
+        </featureDescription>
+      </features>
+    </typeDescription>
+    <typeDescription>
+      <name>edu.mayo.bmi.uima.SmokingStatus.type.SmokerNamedEntityAnnotation</name>
+      <description/>
+      <supertypeName>edu.mayo.bmi.uima.core.type.textsem.IdentifiedAnnotation</supertypeName>
+    </typeDescription>
+    <typeDescription>
+      <name>edu.mayo.bmi.uima.SmokingStatus.type.NonSmokerNamedEntityAnnotation</name>
+      <description/>
+      <supertypeName>edu.mayo.bmi.uima.core.type.textsem.IdentifiedAnnotation</supertypeName>
+    </typeDescription>
+    <typeDescription>
+      <name>edu.mayo.bmi.smoking.type.SmokingDocumentClassification</name>
+      <description>Represents classification related to the document</description>
+      <supertypeName>uima.tcas.Annotation</supertypeName>
+      <features>
+        <featureDescription>
+          <name>classification</name>
+          <description>represents the document level classification that RecordResolutionAnnotator assigns</description>
+          <rangeTypeName>uima.cas.String</rangeTypeName>
+        </featureDescription>
+        <featureDescription>
+          <name>recordID</name>
+          <description>Represents the document record id</description>
+          <rangeTypeName>uima.cas.String</rangeTypeName>
+        </featureDescription>
+      </features>
+    </typeDescription>
+    <typeDescription>
+      <name>edu.mayo.bmi.uima.SmokingStatus.type.UnknownSmokerNamedEntityAnnotation</name>
+      <description/>
+      <supertypeName>edu.mayo.bmi.uima.core.type.textsem.IdentifiedAnnotation</supertypeName>
+    </typeDescription>
+  </types>
+</typeSystemDescription>

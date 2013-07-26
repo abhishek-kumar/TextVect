@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<taeDescription xmlns="http://uima.apache.org/resourceSpecifier">
+<frameworkImplementation>org.apache.uima.java</frameworkImplementation>
+<primitive>true</primitive>
+<annotatorImplementationName>edu.mayo.bmi.uima.ae.CdaCasInitializer</annotatorImplementationName>
+<analysisEngineMetaData>
+<name>CdaCasInitializer</name>
+<description>Creates a plaintext view from a CDA view.  
+This does not handle all CDA documents.
+The CDA must conform to the DTD resource.</description>
+<version>2.1</version>
+<vendor>Mayo Clinic</vendor>
+<configurationParameters/>
+<configurationParameterSettings/>
+<typeSystemDescription>
+<imports>
+</imports>
+</typeSystemDescription>
+<typePriorities/>
+<fsIndexCollection/>
+<capabilities>
+<capability>
+<inputs>
+<type allAnnotatorFeatures="true">edu.mayo.bmi.uima.core.type.syntax.BaseToken</type>
+</inputs>
+<outputs>
+<type allAnnotatorFeatures="true">edu.mayo.bmi.uima.core.type.textspan.Segment</type>
+<type allAnnotatorFeatures="true">edu.mayo.bmi.uima.type.util.Pair</type>
+<type allAnnotatorFeatures="true">edu.mayo.bmi.uima.type.util.Pairs</type>
+<type allAnnotatorFeatures="true">uima.tcas.DocumentAnnotation</type>
+</outputs>
+<outputSofas>
+<sofaName>plaintext</sofaName>
+</outputSofas>
+<languagesSupported/>
+</capability>
+</capabilities>
+<operationalProperties>
+<modifiesCas>true</modifiesCas>
+<multipleDeploymentAllowed>true</multipleDeploymentAllowed>
+<outputsNewCASes>false</outputsNewCASes>
+</operationalProperties>
+</analysisEngineMetaData>
+<externalResourceDependencies>
+<externalResourceDependency>
+<key>HyphenDictionary</key>
+<description></description>
+<interfaceName>edu.mayo.bmi.uima.core.resource.FileResource</interfaceName>
+<optional>false</optional>
+</externalResourceDependency>
+<externalResourceDependency>
+<key>DTD</key>
+<description></description>
+<interfaceName>edu.mayo.bmi.uima.core.resource.FileResource</interfaceName>
+<optional>false</optional>
+</externalResourceDependency>
+</externalResourceDependencies>
+<resourceManagerConfiguration>
+<externalResources>
+<externalResource>
+<name>DtdFile</name>
+<description></description>
+<fileResourceSpecifier>
+<fileUrl>file:docpreresources/cda/NotesIIST_RTF.DTD</fileUrl>
+</fileResourceSpecifier>
+<implementationName>edu.mayo.bmi.uima.core.resource.FileResourceImpl</implementationName>
+</externalResource>
+<externalResource>
+<name>HyphenFile</name>
+<description></description>
+<fileResourceSpecifier>
+<fileUrl>file:coreresources/tokenizer/hyphenated.txt</fileUrl>
+</fileResourceSpecifier>
+<implementationName>edu.mayo.bmi.uima.core.resource.FileResourceImpl</implementationName>
+</externalResource>
+</externalResources>
+<externalResourceBindings>
+<externalResourceBinding>
+<key>DTD</key>
+<resourceName>DtdFile</resourceName>
+</externalResourceBinding>
+<externalResourceBinding>
+<key>HyphenDictionary</key>
+<resourceName>HyphenFile</resourceName>
+</externalResourceBinding>
+</externalResourceBindings>
+</resourceManagerConfiguration>
+</taeDescription>

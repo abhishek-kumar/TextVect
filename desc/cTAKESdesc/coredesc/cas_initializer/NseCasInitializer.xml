@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<casInitializerDescription xmlns="http://uima.apache.org/resourceSpecifier">
+  <frameworkImplementation>org.apache.uima.java</frameworkImplementation>
+  <implementationName>edu.mayo.bmi.uima.core.ci.SegmentCasInitializer</implementationName>
+  <processingResourceMetaData>
+    <name>NseCasInitializer</name>
+    <description>Takes a NSE GPP Model formatted text file and creates SegmentAnnotations over it.</description>
+    <version>1.0</version>
+    <vendor/>
+    <configurationParameters>
+      <configurationParameter>
+        <name>StartTagExpression</name>
+        <description>Regular expression for the start tag.</description>
+        <type>String</type>
+        <multiValued>false</multiValued>
+        <mandatory>true</mandatory>
+      </configurationParameter>
+      <configurationParameter>
+        <name>EndTagExpression</name>
+        <description>Regular expression for the end tag.</description>
+        <type>String</type>
+        <multiValued>false</multiValued>
+        <mandatory>true</mandatory>
+      </configurationParameter>
+    </configurationParameters>
+    <configurationParameterSettings>
+      <nameValuePair>
+        <name>StartTagExpression</name>
+        <value>
+          <string>\[start\ssection\sid="\d{5}"\]</string>
+        </value>
+      </nameValuePair>
+      <nameValuePair>
+        <name>EndTagExpression</name>
+        <value>
+          <string>\[end\ssection\sid="\d{5}"\]</string>
+        </value>
+      </nameValuePair>
+    </configurationParameterSettings>
+    <typeSystemDescription/>
+    <capabilities/>
+    <operationalProperties>
+      <modifiesCas>true</modifiesCas>
+      <multipleDeploymentAllowed>true</multipleDeploymentAllowed>
+    </operationalProperties>
+  </processingResourceMetaData>
+</casInitializerDescription>

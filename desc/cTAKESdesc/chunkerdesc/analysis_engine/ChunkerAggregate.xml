@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<analysisEngineDescription xmlns="http://uima.apache.org/resourceSpecifier">
+<frameworkImplementation>org.apache.uima.java</frameworkImplementation>
+<primitive>false</primitive>
+<delegateAnalysisEngineSpecifiers>
+<delegateAnalysisEngine key="SimpleSegmentAnnotator">
+<import location="SimpleSegmentAnnotator.xml"/>
+</delegateAnalysisEngine>
+<delegateAnalysisEngine key="Chunker">
+<import location="Chunker.xml"/>
+</delegateAnalysisEngine>
+<delegateAnalysisEngine key="SentenceDetectorAnnotator">
+<import location="SentenceDetectorAnnotator.xml"/>
+</delegateAnalysisEngine>
+<delegateAnalysisEngine key="TokenizerAnnotator">
+<import location="../../coredesc/analysis_engine/TokenizerAnnotator.xml"/>  
+</delegateAnalysisEngine>
+<delegateAnalysisEngine key="POSTagger">
+<import location="../../posdesc/analysis_engine/POSTagger.xml"/>
+</delegateAnalysisEngine>
+</delegateAnalysisEngineSpecifiers>
+<analysisEngineMetaData>
+<name>Chunker Aggregate</name>
+<description></description>
+<version>1.0</version>
+<vendor></vendor>
+<configurationParameters searchStrategy="language_fallback">
+<configurationParameter>
+<name>ChunkCreatorClass</name>
+<type>String</type>
+<multiValued>false</multiValued>
+<mandatory>true</mandatory>
+<overrides>
+<parameter>Chunker/ChunkCreatorClass</parameter>
+</overrides>
+</configurationParameter>
+<configurationParameter>
+<name>CaseSensitive</name>
+<type>Boolean</type>
+<multiValued>false</multiValued>
+<mandatory>true</mandatory>
+<overrides>
+<parameter>POSTagger/CaseSensitive</parameter>
+</overrides>
+</configurationParameter>
+</configurationParameters>
+<configurationParameterSettings>
+<nameValuePair>
+<name>ChunkCreatorClass</name>
+<value>
+<string>edu.mayo.bmi.uima.chunker.DefaultChunkCreator</string>
+</value>
+</nameValuePair>
+<nameValuePair>
+<name>CaseSensitive</name>
+<value>
+<boolean>true</boolean>
+</value>
+</nameValuePair>
+</configurationParameterSettings>
+<flowConstraints>
+<fixedFlow>
+<node>SimpleSegmentAnnotator</node>
+<node>SentenceDetectorAnnotator</node>
+<node>TokenizerAnnotator</node>
+<node>POSTagger</node>
+<node>Chunker</node>
+</fixedFlow>
+</flowConstraints>
+<typePriorities/>
+<fsIndexCollection/>
+<capabilities>
+<capability>
+<inputs/>
+<outputs/>
+<languagesSupported/>
+</capability>
+</capabilities>
+<operationalProperties>
+<modifiesCas>true</modifiesCas>
+<multipleDeploymentAllowed>true</multipleDeploymentAllowed>
+<outputsNewCASes>false</outputsNewCASes>
+</operationalProperties>
+</analysisEngineMetaData>
+<resourceManagerConfiguration/>
+</analysisEngineDescription>

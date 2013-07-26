@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<taeDescription xmlns="http://uima.apache.org/resourceSpecifier">
+<frameworkImplementation>org.apache.uima.java</frameworkImplementation>
+<primitive>true</primitive>
+<annotatorImplementationName>edu.mayo.bmi.uima.termspotter.ae.SubSectionAnnotator</annotatorImplementationName>
+<analysisEngineMetaData>
+<name>SubSectionBoundaryAnnotator</name>
+<description></description>
+<version></version>
+<vendor></vendor>
+<configurationParameters/>
+<configurationParameterSettings/>
+<typeSystemDescription/>
+<typePriorities/>
+<fsIndexCollection/>
+<capabilities>
+<capability>
+<inputs>
+<type allAnnotatorFeatures="true">edu.mayo.bmi.uima.core.type.textsem.IdentifiedAnnotation</type>
+<type allAnnotatorFeatures="true">edu.mayo.bmi.uima.core.type.syntax.BaseToken</type>
+</inputs>
+<outputs>
+<type allAnnotatorFeatures="true">edu.mayo.bmi.uima.ctx.type.ContextAnnotation</type>
+</outputs>
+<languagesSupported/>
+</capability>
+</capabilities>
+<operationalProperties>
+<modifiesCas>true</modifiesCas>
+<multipleDeploymentAllowed>true</multipleDeploymentAllowed>
+<outputsNewCASes>false</outputsNewCASes>
+</operationalProperties>
+</analysisEngineMetaData>
+<externalResourceDependencies>
+<externalResourceDependency>
+<key>ExamTitleWordsFile</key>
+<description></description>
+<interfaceName>edu.mayo.bmi.uima.core.resource.FileResource</interfaceName>
+<optional>false</optional>
+</externalResourceDependency>
+</externalResourceDependencies>
+<resourceManagerConfiguration>
+<externalResources>
+<externalResource>
+<name>ExamTitleWordsFileResource</name>
+<description></description>
+<fileResourceSpecifier>
+<fileUrl>file:padresources/lookup/ExamTitleWords.txt</fileUrl>
+</fileResourceSpecifier>
+<implementationName>edu.mayo.bmi.uima.core.resource.FileResourceImpl</implementationName>
+</externalResource>
+</externalResources>
+<externalResourceBindings>
+<externalResourceBinding>
+<key>ExamTitleWordsFile</key>
+<resourceName>ExamTitleWordsFileResource</resourceName>
+</externalResourceBinding>
+</externalResourceBindings>
+</resourceManagerConfiguration>
+</taeDescription>

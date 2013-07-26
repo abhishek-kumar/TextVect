@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<taeDescription xmlns="http://uima.apache.org/resourceSpecifier">
+<frameworkImplementation>org.apache.uima.java</frameworkImplementation>
+<primitive>false</primitive>
+<delegateAnalysisEngineSpecifiers>
+<delegateAnalysisEngine key="TokensAndSentences">
+<import location="../../coredesc/analysis_engine/TokensAndSentencesTAE.xml"/>
+</delegateAnalysisEngine>
+<delegateAnalysisEngine key="LvgAnnotator">
+<import location="LvgAnnotator.xml"/>
+</delegateAnalysisEngine>
+</delegateAnalysisEngineSpecifiers>
+<analysisEngineMetaData>
+<name>LVG Annotator</name>
+<description>LVG Annotator</description>
+<version>2.0</version>
+<vendor></vendor>
+<configurationParameters/>
+<configurationParameterSettings/>
+<flowConstraints>
+<fixedFlow>
+<node>TokensAndSentences</node>
+<node>LvgAnnotator</node>
+</fixedFlow>
+</flowConstraints>
+<typePriorities/>
+<fsIndexCollection/>
+<capabilities>
+<capability>
+<inputs/>
+<outputs/>
+<languagesSupported>
+<language>en</language>
+</languagesSupported>
+</capability>
+</capabilities>
+<operationalProperties>
+<modifiesCas>true</modifiesCas>
+<multipleDeploymentAllowed>true</multipleDeploymentAllowed>
+<outputsNewCASes>false</outputsNewCASes>
+</operationalProperties>
+</analysisEngineMetaData>
+<resourceManagerConfiguration/>
+</taeDescription>

@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<typeSystemDescription xmlns="http://uima.apache.org/resourceSpecifier">
+  <name>Relation</name>
+  <description/>
+  <version>1.0</version>
+  <vendor/>
+  <imports>
+    <import location="DiscoveryTechnique.xml"/>
+    <import location="Properties.xml"/>
+  </imports>
+  <types>
+    <typeDescription>
+      <name>org.mipacq.annotation.type.Relation</name>
+      <description/>
+      <supertypeName>uima.cas.TOP</supertypeName>
+      <features>
+        <featureDescription>
+          <name>id</name>
+          <description/>
+          <rangeTypeName>uima.cas.Integer</rangeTypeName>
+        </featureDescription>
+        <featureDescription>
+          <name>category</name>
+          <description/>
+          <rangeTypeName>uima.cas.String</rangeTypeName>
+        </featureDescription>
+        <featureDescription>
+          <name>discoveryTechnique</name>
+          <description/>
+          <rangeTypeName>org.mipacq.annotation.type.DiscoveryTechnique</rangeTypeName>
+        </featureDescription>
+        <featureDescription>
+          <name>properties</name>
+          <description/>
+          <rangeTypeName>org.mipacq.annotation.type.Properties</rangeTypeName>
+        </featureDescription>
+      </features>
+    </typeDescription>
+  </types>
+</typeSystemDescription>

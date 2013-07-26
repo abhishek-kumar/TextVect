@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<typeSystemDescription xmlns="http://uima.apache.org/resourceSpecifier">
+  <name>TypeSystem</name>
+  <description/>
+  <version>1.0</version>
+  <vendor/>
+  <imports>
+<!-- 
+    <import name="edu.mayo.bmi.uima.core.type.syntax.BaseToken"/>
+    <import name="edu.mayo.bmi.uima.core.type.ContractionToken"/>
+    <import name="edu.mayo.bmi.uima.core.type.DocumentID"/>
+    <import name="edu.mayo.bmi.uima.core.type.IdentifiedAnnotation"/>
+    <import name="edu.mayo.bmi.uima.core.type.textsem.IdentifiedAnnotation"/>
+    <import name="edu.mayo.bmi.uima.core.type.NewlineToken"/>
+    <import name="edu.mayo.bmi.uima.core.type.NumToken"/>
+    <import name="edu.mayo.bmi.uima.core.type.OntologyConcept"/>
+    <import name="edu.mayo.bmi.uima.core.type.PunctuationToken"/>
+    <import name="edu.mayo.bmi.uima.core.type.textspan.Segment"/>
+    <import name="edu.mayo.bmi.uima.core.type.textspan.Sentence"/>
+    <import name="edu.mayo.bmi.uima.core.type.SymbolToken"/>
+    <import name="edu.mayo.bmi.uima.core.type.UmlsConcept"/>
+    <import name="edu.mayo.bmi.uima.core.type.WordToken"/>
+-->
+  </imports>
+</typeSystemDescription>

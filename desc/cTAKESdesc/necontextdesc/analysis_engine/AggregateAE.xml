@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<analysisEngineDescription xmlns="http://uima.apache.org/resourceSpecifier">
+<frameworkImplementation>org.apache.uima.java</frameworkImplementation>
+<primitive>false</primitive>
+<delegateAnalysisEngineSpecifiers>
+<delegateAnalysisEngine key="StatusAnnotator">
+<import location="StatusAnnotator.xml"/>
+</delegateAnalysisEngine>
+<delegateAnalysisEngine key="NegationAnnotator">
+<import location="NegationAnnotator.xml"/>
+</delegateAnalysisEngine>
+</delegateAnalysisEngineSpecifiers>
+<analysisEngineMetaData>
+<name>AE</name>
+<description>Negation and Status annotators</description>
+<version>1.0</version>
+<vendor>Mayo Clinic</vendor>
+<configurationParameters/>
+<configurationParameterSettings/>
+<flowConstraints>
+<fixedFlow>
+<node>NegationAnnotator</node>
+<node>StatusAnnotator</node>
+</fixedFlow>
+</flowConstraints>
+<typePriorities/>
+<fsIndexCollection/>
+<capabilities>
+<capability>
+<inputs/>
+<outputs/>
+<languagesSupported/>
+</capability>
+</capabilities>
+<operationalProperties>
+<modifiesCas>true</modifiesCas>
+<multipleDeploymentAllowed>true</multipleDeploymentAllowed>
+<outputsNewCASes>false</outputsNewCASes>
+</operationalProperties>
+</analysisEngineMetaData>
+<resourceManagerConfiguration/>
+</analysisEngineDescription>

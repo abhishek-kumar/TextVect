@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<analysisEngineDescription xmlns="http://uima.apache.org/resourceSpecifier">
+  <frameworkImplementation>org.apache.uima.java</frameworkImplementation>
+  <primitive>false</primitive>
+  <delegateAnalysisEngineSpecifiers>
+    <delegateAnalysisEngine key="MipacqMarkableCreator">
+      <import location="MipacqMarkableCreator.xml"/>
+    </delegateAnalysisEngine>
+    <delegateAnalysisEngine key="MipacqMarkableExpander">
+      <import location="MipacqMarkableExpander.xml"/>
+    </delegateAnalysisEngine>
+    <delegateAnalysisEngine key="MipacqMarkablePairGenerator">
+      <import location="MipacqMarkablePairGenerator.xml"/>
+    </delegateAnalysisEngine>
+  </delegateAnalysisEngineSpecifiers>
+  <analysisEngineMetaData>
+    <name>MarkableLabeledPairGenerator</name>
+    <description/>
+    <version>1.1</version>
+    <vendor>Mayo Clinic</vendor>
+    <configurationParameters searchStrategy="language_fallback"/>
+    <configurationParameterSettings/>
+    <flowConstraints>
+      <fixedFlow>
+        <node>MipacqMarkableCreator</node>
+        <node>MipacqMarkableExpander</node>
+        <node>MipacqMarkablePairGenerator</node>
+      </fixedFlow>
+    </flowConstraints>
+    <typePriorities/>
+    <fsIndexCollection/>
+    <capabilities>
+      <capability>
+        <inputs/>
+        <outputs/>
+        <languagesSupported/>
+      </capability>
+    </capabilities>
+    <operationalProperties>
+      <modifiesCas>true</modifiesCas>
+      <multipleDeploymentAllowed>true</multipleDeploymentAllowed>
+      <outputsNewCASes>false</outputsNewCASes>
+    </operationalProperties>
+  </analysisEngineMetaData>
+  <resourceManagerConfiguration/>
+</analysisEngineDescription>

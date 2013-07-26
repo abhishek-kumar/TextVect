@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<taeDescription xmlns="http://uima.apache.org/resourceSpecifier">
+<frameworkImplementation>org.apache.uima.java</frameworkImplementation>
+<primitive>true</primitive>
+<annotatorImplementationName>edu.mayo.bmi.uima.core.ae.OverlapAnnotator</annotatorImplementationName>
+<analysisEngineMetaData>
+<name>Maximize Lookup Windows</name>
+<description></description>
+<version></version>
+<vendor>Mayo</vendor>
+<configurationParameters>
+<configurationParameter>
+<name>A_ObjectClass</name>
+<description>JCas object classname designated A.</description>
+<type>String</type>
+<multiValued>false</multiValued>
+<mandatory>true</mandatory>
+</configurationParameter>
+<configurationParameter>
+<name>B_ObjectClass</name>
+<description>JCas object classname designated B.</description>
+<type>String</type>
+<multiValued>false</multiValued>
+<mandatory>true</mandatory>
+</configurationParameter>
+<configurationParameter>
+<name>OverlapType</name>
+<description>Allowed values are:
+
+NONE
+
+or any combination of the following delimited by | char
+
+PARTIAL
+EXACT
+A_ENV_B
+B_ENV_A</description>
+<type>String</type>
+<multiValued>false</multiValued>
+<mandatory>true</mandatory>
+</configurationParameter>
+<configurationParameter>
+<name>ActionType</name>
+<description>Allowed values are: CREATE, MODIFY, DELETE</description>
+<type>String</type>
+<multiValued>false</multiValued>
+<mandatory>true</mandatory>
+</configurationParameter>
+<configurationParameter>
+<name>CreateAction</name>
+<description>not implemented yet</description>
+<type>String</type>
+<multiValued>true</multiValued>
+<mandatory>false</mandatory>
+</configurationParameter>
+<configurationParameter>
+<name>ModifyAction</name>
+<description>Required properties:
+
+selector=A or B
+begin=A or B or SMALLEST or LARGEST
+end=A or B or SMALLEST or LARGEST</description>
+<type>String</type>
+<multiValued>true</multiValued>
+<mandatory>false</mandatory>
+</configurationParameter>
+<configurationParameter>
+<name>DeleteAction</name>
+<description>Required Properties:
+
+selector=A or B or BOTH</description>
+<type>String</type>
+<multiValued>true</multiValued>
+<mandatory>false</mandatory>
+</configurationParameter>
+</configurationParameters>
+<configurationParameterSettings>
+<nameValuePair>
+<name>A_ObjectClass</name>
+<value>
+<string>edu.mayo.bmi.uima.core.type.textspan.LookupWindowAnnotation</string>
+</value>
+</nameValuePair>
+<nameValuePair>
+<name>B_ObjectClass</name>
+<value>
+<string>edu.mayo.bmi.uima.core.type.textspan.LookupWindowAnnotation</string>
+</value>
+</nameValuePair>
+<nameValuePair>
+<name>OverlapType</name>
+<value>
+<string>A_ENV_B</string>
+</value>
+</nameValuePair>
+<nameValuePair>
+<name>ActionType</name>
+<value>
+<string>DELETE</string>
+</value>
+</nameValuePair>
+<nameValuePair>
+<name>ModifyAction</name>
+<value>
+<array/>
+</value>
+</nameValuePair>
+<nameValuePair>
+<name>DeleteAction</name>
+<value>
+<array>
+<string>selector=B</string>
+</array>
+</value>
+</nameValuePair>
+</configurationParameterSettings>
+<typeSystemDescription/>
+<capabilities>
+<capability>
+<inputs/>
+<outputs/>
+<languagesSupported/>
+</capability>
+</capabilities>
+<operationalProperties>
+<modifiesCas>true</modifiesCas>
+<multipleDeploymentAllowed>true</multipleDeploymentAllowed>
+</operationalProperties>
+</analysisEngineMetaData>
+</taeDescription>

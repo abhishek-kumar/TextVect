@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<casConsumerDescription xmlns="http://uima.apache.org/resourceSpecifier">
+<frameworkImplementation>org.apache.uima.java</frameworkImplementation>
+<implementationName>edu.mayo.bmi.uima.sideeffect.cc.SideEffectSentenceCasConsumer</implementationName>
+<processingResourceMetaData>
+<name>SideEffectSentenceCasConsumer</name>
+<description>Can write sentences containing side effects found by both SideEffectAnnotator (rule based) and SESentenceClassifierAnnotator (ML - C4.5). 
+Currently only write the side effect sentences that are not found by  SideEffectAnnotator but by SESentenceClassifierAnnotator. The output file name and delimiter are set by Parameters.
+docName|side effect sentence|begin:end
+</description>
+<version>1.0</version>
+<vendor></vendor>
+<configurationParameters>
+<configurationParameter>
+<name>OutputFile</name>
+<type>String</type>
+<multiValued>false</multiValued>
+<mandatory>true</mandatory>
+</configurationParameter>
+<configurationParameter>
+<name>Delimiter</name>
+<type>String</type>
+<multiValued>false</multiValued>
+<mandatory>true</mandatory>
+</configurationParameter>
+</configurationParameters>
+<configurationParameterSettings>
+<nameValuePair>
+<name>OutputFile</name>
+<value>
+<string>r:\Dept\Sohn\Temp\sideEffectsSentence.txt</string>
+</value>
+</nameValuePair>
+<nameValuePair>
+<name>Delimiter</name>
+<value>
+<string>|</string>
+</value>
+</nameValuePair>
+</configurationParameterSettings>
+<typeSystemDescription/>
+<typePriorities/>
+<fsIndexCollection/>
+<capabilities/>
+<operationalProperties>
+<modifiesCas>false</modifiesCas>
+<multipleDeploymentAllowed>false</multipleDeploymentAllowed>
+</operationalProperties>
+</processingResourceMetaData>
+<resourceManagerConfiguration/>
+</casConsumerDescription>

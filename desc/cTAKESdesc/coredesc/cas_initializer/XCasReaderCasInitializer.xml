@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<casInitializerDescription xmlns="http://uima.apache.org/resourceSpecifier">
+<frameworkImplementation>org.apache.uima.java</frameworkImplementation>
+<implementationName>edu.mayo.bmi.uima.core.ci.XCasReaderCasInitializer</implementationName>
+<processingResourceMetaData>
+<name>XCas Reader CAS Initializer</name>
+<description>Loads an XCAS into a CAS object.</description>
+<version>1.0</version>
+<vendor>Mayo</vendor>
+<configurationParameters>
+<configurationParameter>
+<name>IgnoreUnknownTypes</name>
+<type>Boolean</type>
+<multiValued>false</multiValued>
+<mandatory>true</mandatory>
+</configurationParameter>
+</configurationParameters>
+<configurationParameterSettings>
+<nameValuePair>
+<name>IgnoreUnknownTypes</name>
+<value>
+<boolean>true</boolean>
+</value>
+</nameValuePair>
+</configurationParameterSettings>
+<typeSystemDescription/>
+<capabilities/>
+<operationalProperties>
+<modifiesCas>true</modifiesCas>
+<multipleDeploymentAllowed>true</multipleDeploymentAllowed>
+</operationalProperties>
+</processingResourceMetaData>
+</casInitializerDescription>

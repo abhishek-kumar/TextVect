@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<typeSystemDescription xmlns="http://uima.apache.org/resourceSpecifier">
+  <name>ContextTypeSystem</name>
+  <description/>
+  <version>1.0</version>
+  <imports>
+    <import location="../../common-type-system/desc/common_type_system.xml"/>
+  </imports>
+  <types>
+    <typeDescription>
+      <name>edu.mayo.bmi.uima.sideeffect.type.SideEffectAnnotation</name>
+      <description/>
+      <supertypeName>uima.tcas.Annotation</supertypeName>
+      <features>
+        <featureDescription>
+          <name>sideEffect</name>
+          <description>side effect mention in NamedEntity</description>
+          <rangeTypeName>edu.mayo.bmi.uima.core.type.textsem.IdentifiedAnnotation</rangeTypeName>
+        </featureDescription>
+        <featureDescription>
+          <name>drug</name>
+          <description/>
+          <rangeTypeName>edu.mayo.bmi.uima.core.type.textsem.IdentifiedAnnotation</rangeTypeName>
+        </featureDescription>
+        <featureDescription>
+          <name>sentence</name>
+          <description>sentence containing side effect</description>
+          <rangeTypeName>edu.mayo.bmi.uima.sideeffect.type.SESentence</rangeTypeName>
+        </featureDescription>
+      </features>
+    </typeDescription>
+    <typeDescription>
+      <name>edu.mayo.bmi.uima.sideeffect.type.PSESentence</name>
+      <description>sentence(s) that contains potential side effect and causing drug</description>
+      <supertypeName>uima.tcas.Annotation</supertypeName>
+    </typeDescription>
+    <typeDescription>
+      <name>edu.mayo.bmi.uima.sideeffect.type.PSESentenceFeature</name>
+      <description/>
+      <supertypeName>uima.tcas.Annotation</supertypeName>
+      <features>
+        <featureDescription>
+          <name>pseSen</name>
+          <description/>
+          <rangeTypeName>edu.mayo.bmi.uima.sideeffect.type.PSESentence</rangeTypeName>
+        </featureDescription>
+        <featureDescription>
+          <name>features</name>
+          <description/>
+          <rangeTypeName>uima.cas.StringArray</rangeTypeName>
+        </featureDescription>
+      </features>
+    </typeDescription>
+    <typeDescription>
+      <name>edu.mayo.bmi.uima.sideeffect.type.SESentence</name>
+      <description/>
+      <supertypeName>uima.tcas.Annotation</supertypeName>
+    </typeDescription>
+  </types>
+</typeSystemDescription>

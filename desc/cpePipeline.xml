@@ -9,7 +9,7 @@
                 <nameValuePair>
                     <name>CorpusLocation</name>
                     <value>
-                        <string>/Users/abhishek/Workspaces/DBMI/TextVect/data/PulmonaryEmbolismDataset/train</string>
+                        <string>../data/PulmonaryEmbolismDataset/train</string>
                     </value>
                 </nameValuePair>
             </configurationParameterSettings>
@@ -18,7 +18,7 @@
     <casProcessors casPoolSize="3" processingUnitThreadCount="1">
         <casProcessor deployment="integrated" name="SimpleSegmentAnnotator">
             <descriptor>
-                <import location="../../cTAKES/cTAKESdesc/coredesc/analysis_engine/SimpleSegmentAnnotator.xml"/>
+                <import location="./cTAKESdesc/coredesc/analysis_engine/SimpleSegmentAnnotator.xml"/>
             </descriptor>
             <deploymentParameters/>
             <errorHandling>
@@ -30,7 +30,7 @@
         </casProcessor>
         <casProcessor deployment="integrated" name="Sentence Detector annotator">
             <descriptor>
-                <import location="../../cTAKES/cTAKESdesc/coredesc/analysis_engine/SentenceDetectorAnnotator.xml"/>
+                <import location="./cTAKESdesc/coredesc/analysis_engine/SentenceDetectorAnnotator.xml"/>
             </descriptor>
             <deploymentParameters/>
             <errorHandling>
@@ -42,7 +42,7 @@
         </casProcessor>
         <casProcessor deployment="integrated" name="TokenizerAnnotator">
             <descriptor>
-                <import location="../../cTAKES/cTAKESdesc/coredesc/analysis_engine/TokenizerAnnotator.xml"/>
+                <import location="./cTAKESdesc/coredesc/analysis_engine/TokenizerAnnotator.xml"/>
             </descriptor>
             <deploymentParameters/>
             <errorHandling>
@@ -54,7 +54,7 @@
         </casProcessor>
         <casProcessor deployment="integrated" name="LVG Annotator">
             <descriptor>
-                <import location="../../cTAKES/cTAKESdesc/lvgdesc/analysis_engine/LvgAnnotator.xml"/>
+                <import location="./cTAKESdesc/lvgdesc/analysis_engine/LvgAnnotator.xml"/>
             </descriptor>
             <deploymentParameters/>
             <errorHandling>
@@ -66,7 +66,7 @@
         </casProcessor>
         <casProcessor deployment="integrated" name="ContextDependentTokenizerAnnotator">
             <descriptor>
-                <import location="../../cTAKES/cTAKESdesc/cdtdesc/analysis_engine/ContextDependentTokenizerAnnotator.xml"/>
+                <import location="./cTAKESdesc/cdtdesc/analysis_engine/ContextDependentTokenizerAnnotator.xml"/>
             </descriptor>
             <deploymentParameters/>
             <errorHandling>
@@ -78,7 +78,7 @@
         </casProcessor>
         <casProcessor deployment="integrated" name="POSTagger">
             <descriptor>
-                <import location="../../cTAKES/cTAKESdesc/posdesc/analysis_engine/POSTagger.xml"/>
+                <import location="./cTAKESdesc/posdesc/analysis_engine/POSTagger.xml"/>
             </descriptor>
             <deploymentParameters/>
             <errorHandling>
@@ -90,7 +90,7 @@
         </casProcessor>
         <casProcessor deployment="integrated" name="Chunker">
             <descriptor>
-                <import location="../../cTAKES/cTAKESdesc/chunkerdesc/analysis_engine/ChunkerTxtVect.xml"/>
+                <import location="./cTAKESdesc/chunkerdesc/analysis_engine/Chunker.xml"/>
             </descriptor>
             <deploymentParameters/>
             <errorHandling>
@@ -102,7 +102,7 @@
         </casProcessor>
         <casProcessor deployment="integrated" name="Adjust NP in NP NP to span both">
             <descriptor>
-                <import location="../../cTAKES/cTAKESdesc/chunkerdesc/analysis_engine/AdjustNounPhraseToIncludeFollowingNP.xml"/>
+                <import location="./cTAKESdesc/chunkerdesc/analysis_engine/AdjustNounPhraseToIncludeFollowingNP.xml"/>
             </descriptor>
             <deploymentParameters/>
             <errorHandling>
@@ -114,7 +114,7 @@
         </casProcessor>
         <casProcessor deployment="integrated" name="Adjust NP in NP PP NP to span all three">
             <descriptor>
-                <import location="../../cTAKES/cTAKESdesc/chunkerdesc/analysis_engine/AdjustNounPhraseToIncludeFollowingPPNP.xml"/>
+                <import location="./cTAKESdesc/chunkerdesc/analysis_engine/AdjustNounPhraseToIncludeFollowingPPNP.xml"/>
             </descriptor>
             <deploymentParameters/>
             <errorHandling>
@@ -126,7 +126,7 @@
         </casProcessor>
         <casProcessor deployment="integrated" name="LookupWindowAnnotator">
             <descriptor>
-                <import location="../../cTAKES/cTAKESdesc/cdpdesc/analysis_engine/LookupWindowAnnotator.xml"/>
+                <import location="./cTAKESdesc/cdpdesc/analysis_engine/LookupWindowAnnotator.xml"/>
             </descriptor>
             <deploymentParameters/>
             <errorHandling>
@@ -138,7 +138,7 @@
         </casProcessor>
         <casProcessor deployment="integrated" name="UmlsDictionaryLookupAnnotator">
             <descriptor>
-                <import location="../../cTAKES/cTAKESdesc/lookupdesc/analysis_engine/DictionaryLookupAnnotatorUMLS.xml"/>
+                <import location="./cTAKESdesc/lookupdesc/analysis_engine/DictionaryLookupAnnotatorUMLS.xml"/>
             </descriptor>
             <deploymentParameters/>
             <errorHandling>
@@ -150,7 +150,7 @@
         </casProcessor>
         <casProcessor deployment="integrated" name="ConceptConvertor">
             <descriptor>
-                <import location="../../cTAKES/cTAKESdesc/assertiondesc/conceptConverterAnalysisEngine.xml"/>
+                <import location="./cTAKESdesc/assertiondesc/conceptConverterAnalysisEngine.xml"/>
             </descriptor>
             <deploymentParameters/>
             <errorHandling>
@@ -162,7 +162,7 @@
         </casProcessor>
         <casProcessor deployment="integrated" name="AssertionAnnotator">
             <descriptor>
-                <import location="../../cTAKES/cTAKESdesc/assertiondesc/assertionAnalysisEngine.xml"/>
+                <import location="./cTAKESdesc/assertiondesc/assertionAnalysisEngine.xml"/>
             </descriptor>
             <deploymentParameters/>
             <errorHandling>
@@ -174,7 +174,7 @@
         </casProcessor>
         <casProcessor deployment="integrated" name="edu.mayo.bmi.nlp.parser.ae.ClearParserDependencyParserAE">
             <descriptor>
-                <import location="../../cTAKES/cTAKESdesc/dpdesc/analysis_engine/ClearParserDependencyParserAE.xml"/>
+                <import location="./cTAKESdesc/dpdesc/analysis_engine/ClearParserDependencyParserAE.xml"/>
             </descriptor>
             <deploymentParameters/>
             <errorHandling>
@@ -186,7 +186,7 @@
         </casProcessor>
         <casProcessor deployment="integrated" name="Feature Encoder">
             <descriptor>
-                <import location="../../FeatureEncoder/desc/FeatureEncoderCasConsumer.xml"/>
+                <import location="FeatureEncoderCasConsumer.xml"/>
             </descriptor>
             <deploymentParameters/>
             <errorHandling>
@@ -199,7 +199,7 @@
                 <nameValuePair>
                     <name>OutputDirectory</name>
                     <value>
-                        <string>/Users/abhishek/Workspaces/DBMI/TextVect/output/TxtVect</string>
+                        <string>../output</string>
                     </value>
                 </nameValuePair>
             </configurationParameterSettings>

@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<analysisEngineDescription xmlns="http://uima.apache.org/resourceSpecifier">
+<frameworkImplementation>org.apache.uima.java</frameworkImplementation>
+<primitive>false</primitive>
+<delegateAnalysisEngineSpecifiers>
+<delegateAnalysisEngine key="CdaCasInitializer">
+<import location="CdaCasInitializer.xml"/>
+</delegateAnalysisEngine>
+</delegateAnalysisEngineSpecifiers>
+<analysisEngineMetaData>
+<name>Aggregate analysis engine for CdaCasInitializer</name>
+<description>Preprocess file in CDA format, including creating a plaintext SOFA.</description>
+<version></version>
+<vendor></vendor>
+<configurationParameters searchStrategy="language_fallback"/>
+<configurationParameterSettings/>
+<flowConstraints>
+<fixedFlow>
+<node>CdaCasInitializer</node>
+</fixedFlow>
+</flowConstraints>
+<typePriorities/>
+<fsIndexCollection/>
+<capabilities>
+<capability>
+<inputs/>
+<outputs/>
+<outputSofas>
+<sofaName>plaintext</sofaName>
+</outputSofas>
+<languagesSupported/>
+</capability>
+</capabilities>
+<operationalProperties>
+<modifiesCas>true</modifiesCas>
+<multipleDeploymentAllowed>true</multipleDeploymentAllowed>
+<outputsNewCASes>false</outputsNewCASes>
+</operationalProperties>
+</analysisEngineMetaData>
+<resourceManagerConfiguration/>
+</analysisEngineDescription>

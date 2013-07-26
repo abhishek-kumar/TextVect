@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<casConsumerDescription xmlns="http://uima.apache.org/resourceSpecifier">
+<frameworkImplementation>org.apache.uima.java</frameworkImplementation>
+<implementationName>edu.mayo.bmi.uima.core.cc.CasConsumer</implementationName>
+<processingResourceMetaData>
+<name>Write CAS to XML file</name>
+<description>Write the CAS to a file as formatted XML</description>
+<version>1.0</version>
+<vendor>Mayo Clinc</vendor>
+<configurationParameters>
+<configurationParameter>
+<name>outputDir</name>
+<description>Where the xml (xcas) files will be written to</description>
+<type>String</type>
+<multiValued>false</multiValued>
+<mandatory>true</mandatory>
+</configurationParameter>
+</configurationParameters>
+<configurationParameterSettings>
+<nameValuePair>
+<name>outputDir</name>
+<value>
+<string>test\data\output</string>
+</value>
+</nameValuePair>
+</configurationParameterSettings>
+<typeSystemDescription>
+<imports>
+</imports>
+</typeSystemDescription>
+<typePriorities/>
+<fsIndexCollection/>
+<capabilities>
+<capability>
+<inputs>
+<type allAnnotatorFeatures="true">edu.mayo.bmi.uima.core.type.DocumentID</type>
+</inputs>
+<outputs/>
+<inputSofas>
+<sofaName>plaintext</sofaName>
+</inputSofas>
+<languagesSupported/>
+</capability>
+</capabilities>
+<operationalProperties>
+<modifiesCas>false</modifiesCas>
+<multipleDeploymentAllowed>false</multipleDeploymentAllowed>
+<outputsNewCASes>false</outputsNewCASes>
+</operationalProperties>
+</processingResourceMetaData>
+<resourceManagerConfiguration/>
+</casConsumerDescription>

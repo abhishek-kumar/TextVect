@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<analysisEngineDescription xmlns="http://uima.apache.org/resourceSpecifier">
+<frameworkImplementation>org.apache.uima.java</frameworkImplementation>
+<primitive>true</primitive>
+<annotatorImplementationName>edu.mayo.bmi.uima.pos_tagger.POSTagger</annotatorImplementationName>
+<analysisEngineMetaData>
+<name>POSTagger</name>
+<description></description>
+<version>1.0</version>
+<vendor></vendor>
+<configurationParameters>
+<configurationParameter>
+<name>PosModelFile</name>
+<description>The file that contains the MaxEnt model used by the part of speech (POS) tagger</description>
+<type>String</type>
+<multiValued>false</multiValued>
+<mandatory>true</mandatory>
+</configurationParameter>
+<configurationParameter>
+<name>TagDictionary</name>
+<description>The file contains a list of words, and for each word, the set of part of speech tags to be considered for that word. For words in the tag dictionary, only the corresponding tags in the tag dictionary are considered when tagging the word with a part of speech.</description>
+<type>String</type>
+<multiValued>false</multiValued>
+<mandatory>false</mandatory>
+</configurationParameter>
+<configurationParameter>
+<name>CaseSensitive</name>
+<type>Boolean</type>
+<multiValued>false</multiValued>
+<mandatory>false</mandatory>
+</configurationParameter>
+</configurationParameters>
+<configurationParameterSettings>
+<nameValuePair>
+<name>PosModelFile</name>
+<value>
+<string>posresources/models/mayo-pos.zip</string>
+</value>
+</nameValuePair>
+<nameValuePair>
+<name>CaseSensitive</name>
+<value>
+<boolean>true</boolean>
+</value>
+</nameValuePair>
+<nameValuePair>
+<name>TagDictionary</name>
+<value>
+<string>posresources/models/tag.dictionary.txt</string>
+</value>
+</nameValuePair>
+</configurationParameterSettings>
+<typeSystemDescription>
+<imports>
+</imports>
+</typeSystemDescription>
+<typePriorities/>
+<fsIndexCollection/>
+<capabilities>
+<capability>
+<inputs>
+<type allAnnotatorFeatures="true">edu.mayo.bmi.uima.core.type.textspan.Sentence</type>
+<type allAnnotatorFeatures="true">edu.mayo.bmi.uima.core.type.syntax.BaseToken</type>
+</inputs>
+<outputs>
+<type allAnnotatorFeatures="true">edu.mayo.bmi.uima.core.type.syntax.BaseToken</type>
+</outputs>
+<languagesSupported/>
+</capability>
+</capabilities>
+<operationalProperties>
+<modifiesCas>true</modifiesCas>
+<multipleDeploymentAllowed>true</multipleDeploymentAllowed>
+<outputsNewCASes>false</outputsNewCASes>
+</operationalProperties>
+</analysisEngineMetaData>
+<resourceManagerConfiguration/>
+</analysisEngineDescription>

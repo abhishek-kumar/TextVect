@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<casConsumerDescription xmlns="http://uima.apache.org/resourceSpecifier">
+<frameworkImplementation>org.apache.uima.java</frameworkImplementation>
+<implementationName>edu.mayo.bmi.uima.termspotter.cc.PADOffSetsRecord</implementationName>
+<processingResourceMetaData>
+<name>PADOffSetRecord</name>
+<description>Processes a given CAS to identify predetermined list of PAD terms</description>
+<version>1.0</version>
+<vendor>Mayo</vendor>
+<configurationParameters>
+<configurationParameter>
+<name>outputFileName</name>
+<type>String</type>
+<multiValued>false</multiValued>
+<mandatory>true</mandatory>
+</configurationParameter>
+<configurationParameter>
+<name>usingAlternateAlgorithm</name>
+<type>Boolean</type>
+<multiValued>false</multiValued>
+<mandatory>false</mandatory>
+</configurationParameter>
+</configurationParameters>
+<configurationParameterSettings>
+<nameValuePair>
+<name>outputFileName</name>
+<value>
+<string>C:\\temp\\PAD_output.txt</string>
+</value>
+</nameValuePair>
+<nameValuePair>
+<name>usingAlternateAlgorithm</name>
+<value>
+<boolean>false</boolean>
+</value>
+</nameValuePair>
+</configurationParameterSettings>
+<typeSystemDescription>
+<imports>
+<import location="../type_system/PADSiteAndTerm.xml"/>
+</imports>
+</typeSystemDescription>
+<capabilities/>
+<operationalProperties>
+<modifiesCas>false</modifiesCas>
+<multipleDeploymentAllowed>false</multipleDeploymentAllowed>
+<outputsNewCASes>false</outputsNewCASes>
+</operationalProperties>
+</processingResourceMetaData>
+<resourceManagerConfiguration/>
+</casConsumerDescription>

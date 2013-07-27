@@ -12,11 +12,11 @@ if [ $TERM = 'xterm-256color' ]; then
   c_green=`tput setaf 2`
   c_end=`tput sgr0`
 else
-  c_bold='[1m'
-  c_red='[1;31m'
-  c_yellow='[1;36m'
-  c_green='[1;32m'
-  c_end='[0m'
+  c_bold='\e[1m'
+  c_red='\e[1;31m'
+  c_yellow='\e[1;36m'
+  c_green='\e[1;32m'
+  c_end=' \e[0m'
 fi
 
 [ ! -d "`pwd`/scripts" ] && cd ..

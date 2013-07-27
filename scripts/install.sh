@@ -88,9 +88,9 @@ fi
 
 # Update ".classpath" to point to correct directories
 cp classpath-template.txt .classpath
-sed -e "s#UIMA_HOME_LIB#$UIMA_HOME/lib#g" -i .bak .classpath
-sed -e "s#UIMA_HOME#$UIMA_HOME#g" -i .bak .classpath
-sed -e "s#ROOT#$ROOT#g" -i .bak .classpath
+sed -e "s#UIMA_HOME_LIB#$UIMA_HOME/lib#g" -i.bak .classpath
+sed -e "s#UIMA_HOME#$UIMA_HOME#g" -i.bak .classpath
+sed -e "s#ROOT#$ROOT#g" -i.bak .classpath
 
 export UIMA_HOME
 export ROOT
